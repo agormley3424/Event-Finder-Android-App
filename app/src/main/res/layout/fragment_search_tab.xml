@@ -2,6 +2,7 @@
 
 <!--Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b' -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
@@ -14,8 +15,22 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="48dp"
-        android:background="#000000"
+        android:background="@color/black"
         android:visibility="visible">
+
+        <EditText
+            android:id="@+id/keywordInput"
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="480dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/green"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/white" />
 
         <TextView
             android:id="@+id/keywordText"
@@ -26,18 +41,32 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="17dp"
             android:text="Keyword*"
-            android:textColor="@color/green" />
+            android:textColor="@color/green"
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView8"
+        <Button
+            android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="271dp"
-            android:layout_marginBottom="2dp"
-            android:text="TextView"
+            android:layout_marginEnd="121dp"
+            android:layout_marginBottom="175dp"
+            android:text="Search"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/outputText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="320dp"
+            android:text="Your output here"
             android:textColor="@color/green" />
+
     </RelativeLayout>
 
 </RelativeLayout>
