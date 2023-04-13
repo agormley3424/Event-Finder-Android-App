@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="48dp"
-        android:background="@color/black"
+        android:background="@color/grey"
         android:visibility="visible">
 
         <EditText
@@ -26,6 +26,21 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="17dp"
             android:layout_marginBottom="480dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/green"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/keywordInput2"
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="388dp"
             android:layout_weight="1"
             android:backgroundTint="@color/green"
             android:ems="10"
@@ -45,6 +60,30 @@
             android:textColor="@color/green"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/keywordText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="199dp"
+            android:text="Category*"
+            android:textColor="@color/green"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/keywordText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="109dp"
+            android:text="Distance (Miles)*"
+            android:textColor="@color/green"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
@@ -58,17 +97,26 @@
             android:text="Search"
             android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/outputText"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/keywordInput2"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="117dp"
-            android:layout_marginBottom="320dp"
-            android:text="Your output here"
-            android:textColor="@color/green" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="-130dp"
+            android:entries="@array/categories"
+            android:spinnerMode="dropdown" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/outputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="602dp"
+        android:text="Your output here"
+        android:textColor="@color/green" />
 
 </RelativeLayout>
