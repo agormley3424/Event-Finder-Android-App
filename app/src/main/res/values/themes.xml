@@ -12,6 +12,36 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+<!--        <item name="android:windowBackground">@drawable/launch_screen</item>-->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/green</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+
+
+
 
     </style>
+
+    <style name="Theme.HW9Attempt4.NoActionBar">
+
+
+    </style>
+
+    <style name="Theme.HW9Attempt4.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.HW9Attempt4.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">-->
+<!--        <item name="windowSplashScreenBackground">@color/darkGrey</item> &lt;!&ndash; If it's a @drawable make sure it's in .xml format&ndash;&gt;-->
+<!--        <item name="windowSplashScreenAnimationDuration">1000</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_png</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Theme.HW9Attempt4</item> &lt;!&ndash; This will switch back to your given theme once the splash screen is gone&ndash;&gt;-->
+<!--    </style>-->
+
+
+    <style name="splashScreenTheme" parent="Theme.SplashScreen">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/darkGrey</item>
+    </style>
+
 </resources>

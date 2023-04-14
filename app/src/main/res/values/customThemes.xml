@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="spinnerTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="Theme.HW9Attempt4.launcherTheme" theme="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/black</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_png</item>
+        <item name="android:windowSplashScreenAnimationDuration">2000</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/purple_500</item>
+        <item name="android:windowSplashScreenBehavior">icon_preferred</item>
+
+<!--        <item name="android:windowBackground">@layout/splash_test</item>-->
+    </style>
+</resources>
