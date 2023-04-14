@@ -1,12 +1,11 @@
 package com.example.hw9attempt4;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.tabs.TabLayout;
 
-public class EventDetails extends AppCompatActivity {
+public class EventActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
@@ -27,9 +26,9 @@ public class EventDetails extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
 
-//        adapter.addFragment(new detailTab(), "Details");
-//        adapter.addFragment(new artistTab(), "Artist(s)");
-//        adapter.addFragment(new venueTab(), "Venue");
+        adapter.addFragment(new detailTab(), "Details");
+        adapter.addFragment(new artistTab(), "Artist(s)");
+        adapter.addFragment(new venueTab(), "Venue");
         viewPager.setAdapter(adapter);
     }
 }

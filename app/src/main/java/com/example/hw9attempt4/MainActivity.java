@@ -1,4 +1,5 @@
 package com.example.hw9attempt4;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -38,8 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.addFragment(new searchTab(), getString(R.string.searchText));
         adapter.addFragment(new favoriteTab(), getString(R.string.favoriteText));
-        adapter.addFragment(new detailTab(), "Details");
+        //adapter.addFragment(new detailTab(), "Details");
         viewPager.setAdapter(adapter);
+    }
+
+    // Sourced from 'https://learntodroid.com/how-to-switch-between-activities-in-android/'
+    public void viewDetails()
+    {
+        Intent switchActivityIntent = new Intent(this, EventActivity.class);
+        startActivity(switchActivityIntent);
     }
 
 }

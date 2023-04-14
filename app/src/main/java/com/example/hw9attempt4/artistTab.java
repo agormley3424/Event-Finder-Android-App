@@ -1,25 +1,19 @@
 package com.example.hw9attempt4;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-//import android.support.v4.app.Fragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link searchTab#newInstance} factory method to
+ * Use the {@link artistTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class searchTab extends Fragment {
+public class artistTab extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +24,7 @@ public class searchTab extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public searchTab() {
+    public artistTab() {
         // Required empty public constructor
     }
 
@@ -40,11 +34,11 @@ public class searchTab extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment searchTab.
+     * @return A new instance of fragment artistTab.
      */
     // TODO: Rename and change types and number of parameters
-    public static searchTab newInstance(String param1, String param2) {
-        searchTab fragment = new searchTab();
+    public static artistTab newInstance(String param1, String param2) {
+        artistTab fragment = new artistTab();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,40 +53,12 @@ public class searchTab extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_tab, container, false);
-        Button searchButton =  view.findViewById(R.id.searchButton);
-        EditText keywordInput =  view.findViewById(R.id.keywordInput);
-        TextView keywordOutput =  view.findViewById(R.id.outputText);
-
-//        searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String output = keywordInput.getText().toString();
-//                keywordOutput.setText(output);
-//                System.out.println(output);
-//            }
-//        });
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewDetails();
-            }
-        });
-        return view;
-    }
-
-    private void viewDetails()
-    {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.viewDetails();
+        return inflater.inflate(R.layout.fragment_artist_tab, container, false);
     }
 }
