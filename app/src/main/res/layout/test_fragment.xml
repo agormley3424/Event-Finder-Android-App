@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="880dp"
                 android:text="bottomText"
-                android:theme="@style/textTheme"
+                android:theme="@style/whiteTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="topText"
-                android:theme="@style/textTheme"
+                android:theme="@style/whiteTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"

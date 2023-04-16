@@ -69,6 +69,7 @@ public class searchTab extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_tab, container, false);
         Button searchButton =  view.findViewById(R.id.searchButton);
+        Button clearButton =  view.findViewById(R.id.clearButton);
         EditText keywordInput =  view.findViewById(R.id.keywordInput);
         TextView keywordOutput =  view.findViewById(R.id.outputText);
 
@@ -85,6 +86,14 @@ public class searchTab extends Fragment {
             @Override
             public void onClick(View v) {
                 viewDetails();
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) getActivity();
+                activity.showSearchResults();
             }
         });
         return view;

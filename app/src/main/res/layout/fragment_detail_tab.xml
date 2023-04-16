@@ -22,28 +22,207 @@
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="900dp"
-                android:text="bottomText"
-                android:theme="@style/textTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.548"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="topText"
-                android:theme="@style/textTheme"
+                android:text="Artist / Teams"
+                android:theme="@style/whiteTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.103"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Artist Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.809"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Venue Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@id/textView11"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toStartOf="@id/textView11"
+                app:layout_constraintTop_toBottomOf="@id/textView11" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Date Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintHorizontal_bias="0.818"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Time Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView13"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Genre Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Price Info Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView15"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@color/green"
+                android:text="Ticket Info Here"
+                android:textColor="@color/white"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView16"
+                app:layout_constraintHorizontal_bias="0.571"
+                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Ticket Link Here"
+                android:theme="@style/greenTextTheme"
+                app:layout_constraintEnd_toEndOf="@+id/textView17"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView17"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
+                android:text="Genres"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.09"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="Venue"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.089"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="136dp"
+                android:text="Time"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.09"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:text="Date"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.089"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="216dp"
+                android:text="Price Range"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="256dp"
+                android:text="Ticket Status"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="296dp"
+                android:text="Buy Tickets At"
+                android:theme="@style/whiteTextTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="331dp"
+                android:layout_height="290dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/bertie"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="333dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </ScrollView>
