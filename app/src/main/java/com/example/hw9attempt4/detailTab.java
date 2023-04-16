@@ -1,16 +1,19 @@
 package com.example.hw9attempt4;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.text.util.Linkify;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,17 +69,33 @@ public class detailTab extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_tab, container, false);
         TextView detailArtists =  view.findViewById(R.id.detailArtists);
         detailArtists.setSelected(true);
-//        detailArtists.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-//        detailArtists.setText("General Information... general information... General Information");
-//        detailArtists.setSelected(true);
-//        detailArtists.setSingleLine(true);
+
         TextView detailVenue = view.findViewById(R.id.detailVenue);
+        detailVenue.setSelected(true);
+
         TextView detailDate = view.findViewById(R.id.detailDate);
+        detailDate.setSelected(true);
+
         TextView detailTime = view.findViewById(R.id.detailTime);
+        detailTime.setSelected(true);
+
         TextView detailGenres = view.findViewById(R.id.detailGenres);
+        detailGenres.setSelected(true);
+
         TextView detailPrice = view.findViewById(R.id.detailPrice);
+        detailPrice.setSelected(true);
+
         TextView detailStatus = view.findViewById(R.id.detailStatus);
+        detailStatus.setSelected(true);
+
         TextView detailBuyAt = view.findViewById(R.id.detailBuyAt);
+        detailBuyAt.setSelected(true);
+        detailBuyAt.setSingleLine(false);
+        //detailBuyAt.setMovementMethod(LinkMovementMethod.getInstance());
+        //detailBuyAt.setSingleLine(true);
+
+        Linkify.addLinks(detailBuyAt, Linkify.WEB_URLS);
+
         ImageView venueImg = view.findViewById(R.id.detailImage);
 
         // Inflate the layout for this fragment

@@ -125,13 +125,20 @@
                 android:id="@+id/detailBuyAt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Ticket Link Here"
+                android:layout_marginTop="20dp"
+                android:textColorLink="@color/green"
+                android:colorAccent="@color/green"
+                android:text="http://www.example.com"
                 android:theme="@style/greenTextTheme"
                 app:layout_constraintEnd_toEndOf="@+id/detailStatus"
                 app:layout_constraintHorizontal_bias="0.446"
                 app:layout_constraintStart_toStartOf="@+id/detailStatus"
-                app:layout_constraintTop_toBottomOf="@+id/detailStatus" />
+                app:layout_constraintTop_toBottomOf="@+id/detailStatus"
+                tools:visibility="visible" />
+
+            <!--                android:clickable="true"-->
+            <!--                android:linksClickable="true"-->
+            <!--                android:textColorLink="@color/green"-->
 
             <TextView
                 android:id="@+id/textView6"
