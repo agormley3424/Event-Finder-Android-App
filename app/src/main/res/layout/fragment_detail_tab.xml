@@ -10,6 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/grey"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,102 +35,103 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailArtists"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Artist Info Here"
+                android:text="Artist Info Heeeeeeeeeeeeeeeeeeeere"
+                android:textAlignment="center"
                 android:theme="@style/greenTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.809"
+                app:layout_constraintHorizontal_bias="0.912"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailVenue"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Venue Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@id/textView11"
+                app:layout_constraintEnd_toEndOf="@id/detailArtists"
                 app:layout_constraintHorizontal_bias="0.481"
-                app:layout_constraintStart_toStartOf="@id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/textView11" />
+                app:layout_constraintStart_toStartOf="@id/detailArtists"
+                app:layout_constraintTop_toBottomOf="@id/detailArtists" />
 
             <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailDate"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Date Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="@+id/detailVenue"
                 app:layout_constraintHorizontal_bias="0.818"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintStart_toStartOf="@+id/detailVenue"
+                app:layout_constraintTop_toBottomOf="@+id/detailVenue" />
 
             <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailTime"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Time Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="@+id/detailDate"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintStart_toStartOf="@+id/detailDate"
+                app:layout_constraintTop_toBottomOf="@+id/detailDate" />
 
             <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailGenres"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Genre Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView14"
+                app:layout_constraintEnd_toEndOf="@+id/detailTime"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintStart_toStartOf="@+id/detailTime"
+                app:layout_constraintTop_toBottomOf="@+id/detailTime" />
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailPrice"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="Price Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView15"
+                app:layout_constraintEnd_toEndOf="@+id/detailGenres"
                 app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toStartOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintStart_toStartOf="@+id/detailGenres"
+                app:layout_constraintTop_toBottomOf="@+id/detailGenres" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/detailStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/green"
                 android:text="Ticket Info Here"
                 android:textColor="@color/white"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintHorizontal_bias="0.571"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintEnd_toEndOf="@+id/detailPrice"
+                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintStart_toStartOf="@+id/detailPrice"
+                app:layout_constraintTop_toBottomOf="@+id/detailPrice" />
 
             <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
+                android:id="@+id/detailBuyAt"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:text="Ticket Link Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/textView17"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintEnd_toEndOf="@+id/detailStatus"
+                app:layout_constraintHorizontal_bias="0.446"
+                app:layout_constraintStart_toStartOf="@+id/detailStatus"
+                app:layout_constraintTop_toBottomOf="@+id/detailStatus" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -216,13 +218,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/detailImage"
                 android:layout_width="331dp"
                 android:layout_height="290dp"
+                android:layout_marginTop="20dp"
                 android:scaleType="fitCenter"
+                app:layout_constraintTop_toBottomOf="@+id/textView9"
                 app:srcCompat="@drawable/bertie"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="333dp" />
+                tools:layout_editor_absoluteX="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </ScrollView>

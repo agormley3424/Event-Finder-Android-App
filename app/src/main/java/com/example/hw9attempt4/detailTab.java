@@ -4,9 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +62,26 @@ public class detailTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_detail_tab, container, false);
+        TextView detailArtists =  view.findViewById(R.id.detailArtists);
+        detailArtists.setSelected(true);
+//        detailArtists.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+//        detailArtists.setText("General Information... general information... General Information");
+//        detailArtists.setSelected(true);
+//        detailArtists.setSingleLine(true);
+        TextView detailVenue = view.findViewById(R.id.detailVenue);
+        TextView detailDate = view.findViewById(R.id.detailDate);
+        TextView detailTime = view.findViewById(R.id.detailTime);
+        TextView detailGenres = view.findViewById(R.id.detailGenres);
+        TextView detailPrice = view.findViewById(R.id.detailPrice);
+        TextView detailStatus = view.findViewById(R.id.detailStatus);
+        TextView detailBuyAt = view.findViewById(R.id.detailBuyAt);
+        ImageView venueImg = view.findViewById(R.id.detailImage);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_tab, container, false);
+        return view;
     }
+
+
 }

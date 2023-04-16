@@ -1,5 +1,7 @@
 package com.example.hw9attempt4;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
