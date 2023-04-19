@@ -16,6 +16,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link venueTab#newInstance} factory method to
@@ -72,6 +74,8 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
 //                .findFragmentById(R.id.venueMap);
 //        mapFragment.getMapAsync(this);
     }
+
+    // Map code sourced from https://github.com/googlemaps/android-samples/blob/main/ApiDemos/java/app/src/gms/java/com/example/mapdemo/RawMapViewDemoActivity.java
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

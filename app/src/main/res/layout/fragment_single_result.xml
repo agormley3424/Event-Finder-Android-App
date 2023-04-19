@@ -11,7 +11,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/artistProfile"
+        android:id="@+id/eventImage"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="5dp"
@@ -30,8 +30,8 @@
         android:textColor="@color/grey"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/artistProfile"
-        app:layout_constraintTop_toTopOf="@+id/artistProfile" />
+        app:layout_constraintStart_toEndOf="@+id/eventImage"
+        app:layout_constraintTop_toTopOf="@+id/eventImage" />
 
     <TextView
         android:id="@+id/eventVenue"
