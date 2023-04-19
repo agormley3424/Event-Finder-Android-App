@@ -1,16 +1,12 @@
 package com.example.hw9attempt4;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.util.Linkify;
@@ -67,16 +63,16 @@ public class detailTab extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detail_tab, container, false);
-        TextView detailArtists =  view.findViewById(R.id.detailArtists);
+        TextView detailArtists =  view.findViewById(R.id.venueName);
         detailArtists.setSelected(true);
 
-        TextView detailVenue = view.findViewById(R.id.detailVenue);
+        TextView detailVenue = view.findViewById(R.id.venueAddress);
         detailVenue.setSelected(true);
 
-        TextView detailDate = view.findViewById(R.id.detailDate);
+        TextView detailDate = view.findViewById(R.id.venueCityState);
         detailDate.setSelected(true);
 
-        TextView detailTime = view.findViewById(R.id.detailTime);
+        TextView detailTime = view.findViewById(R.id.venueContact);
         detailTime.setSelected(true);
 
         TextView detailGenres = view.findViewById(R.id.detailGenres);

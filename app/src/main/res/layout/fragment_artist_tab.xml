@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/detailArtists"
+                android:id="@+id/venueName"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -48,40 +48,40 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/detailVenue"
+                android:id="@+id/venueAddress"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Venue Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@id/detailArtists"
+                app:layout_constraintEnd_toEndOf="@id/venueName"
                 app:layout_constraintHorizontal_bias="0.481"
-                app:layout_constraintStart_toStartOf="@id/detailArtists"
-                app:layout_constraintTop_toBottomOf="@id/detailArtists" />
+                app:layout_constraintStart_toStartOf="@id/venueName"
+                app:layout_constraintTop_toBottomOf="@id/venueName" />
 
             <TextView
-                android:id="@+id/detailDate"
+                android:id="@+id/venueCityState"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Date Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/detailVenue"
+                app:layout_constraintEnd_toEndOf="@+id/venueAddress"
                 app:layout_constraintHorizontal_bias="0.818"
-                app:layout_constraintStart_toStartOf="@+id/detailVenue"
-                app:layout_constraintTop_toBottomOf="@+id/detailVenue" />
+                app:layout_constraintStart_toStartOf="@+id/venueAddress"
+                app:layout_constraintTop_toBottomOf="@+id/venueAddress" />
 
             <TextView
-                android:id="@+id/detailTime"
+                android:id="@+id/venueContact"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Time Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/detailDate"
+                app:layout_constraintEnd_toEndOf="@+id/venueCityState"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/detailDate"
-                app:layout_constraintTop_toBottomOf="@+id/detailDate" />
+                app:layout_constraintStart_toStartOf="@+id/venueCityState"
+                app:layout_constraintTop_toBottomOf="@+id/venueCityState" />
 
             <TextView
                 android:id="@+id/detailGenres"
@@ -90,10 +90,10 @@
                 android:layout_marginTop="20dp"
                 android:text="Genre Info Here"
                 android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/detailTime"
+                app:layout_constraintEnd_toEndOf="@+id/venueContact"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/detailTime"
-                app:layout_constraintTop_toBottomOf="@+id/detailTime" />
+                app:layout_constraintStart_toStartOf="@+id/venueContact"
+                app:layout_constraintTop_toBottomOf="@+id/venueContact" />
 
             <TextView
                 android:id="@+id/detailPrice"
@@ -177,7 +177,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewWhatever"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="96dp"
