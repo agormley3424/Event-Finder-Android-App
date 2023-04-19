@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/artistName" />
 
     <TextView
-        android:id="@+id/artistFollowers3"
+        android:id="@+id/artistPopularity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
@@ -106,10 +106,10 @@
         android:text="Rank"
         android:textColor="@color/grey"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/artistFollowers3"
+        app:layout_constraintEnd_toEndOf="@+id/artistPopularity"
         app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/artistFollowers3"
-        app:layout_constraintTop_toBottomOf="@+id/artistFollowers3" />
+        app:layout_constraintStart_toStartOf="@+id/artistPopularity"
+        app:layout_constraintTop_toBottomOf="@+id/artistPopularity" />
 
     <TextView
         android:id="@+id/artistLink"
