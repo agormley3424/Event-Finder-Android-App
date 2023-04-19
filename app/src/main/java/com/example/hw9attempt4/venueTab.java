@@ -2,18 +2,27 @@ package com.example.hw9attempt4;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import androidx.fragment.app.FragmentManager;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link venueTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class venueTab extends Fragment {
+//public class venueTab extends Fragment implements OnMapReadyCallback {
+public class venueTab extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +62,11 @@ public class venueTab extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        // Get a handle to the fragment and register the callback.
+//        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
+//                .findFragmentById(R.id.venueMap);
+//        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -61,4 +75,12 @@ public class venueTab extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_venue_tab, container, false);
     }
+
+    // Get a handle to the GoogleMap object and display marker.
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        googleMap.addMarker(new MarkerOptions()
+//                .position(new LatLng(0, 0))
+//                .title("Marker"));
+//    }
 }

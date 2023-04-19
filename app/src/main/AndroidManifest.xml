@@ -5,7 +5,8 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="$AIzaSyBQIL9ndc2oHZ4w9VXJSVjV684c7pJJMHY" />
 
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:icon="@mipmap/responsive_icon"
         android:roundIcon="@mipmap/responsive_icon_round"
