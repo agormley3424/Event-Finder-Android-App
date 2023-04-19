@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    tools:context=".single_artist">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/artistProfile"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/bertie_hat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/artistProfile3"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/bertie_hat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/artistProfile2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/bertie_hat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/artistProfile4"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/bertie_hat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/artistName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Artist Name"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/artistProfile"
+        app:layout_constraintTop_toTopOf="@+id/artistProfile" />
+
+    <TextView
+        android:id="@+id/artistName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Popular Albums"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/artistProfile"
+        app:layout_constraintTop_toBottomOf="@+id/artistProfile" />
+
+    <TextView
+        android:id="@+id/artistFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="X Followers"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/artistProfile"
+        app:layout_constraintTop_toBottomOf="@+id/artistName" />
+
+    <TextView
+        android:id="@+id/artistFollowers3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:text="Popularity"
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/artistName"
+        app:layout_constraintTop_toTopOf="@+id/artistName" />
+
+    <TextView
+        android:id="@+id/artistRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="<Rank>"
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/artistFollowers3"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/artistFollowers3"
+        app:layout_constraintTop_toBottomOf="@+id/artistFollowers3" />
+
+    <TextView
+        android:id="@+id/artistLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:text="Check out on Spotify https://www.spotify.com"
+        android:autoLink="web"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/artistProfile"
+        app:layout_constraintTop_toBottomOf="@+id/artistName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
