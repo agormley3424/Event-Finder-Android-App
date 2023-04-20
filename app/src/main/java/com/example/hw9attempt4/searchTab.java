@@ -71,7 +71,6 @@ public class searchTab extends Fragment {
         Button searchButton =  view.findViewById(R.id.searchButton);
         Button clearButton =  view.findViewById(R.id.clearButton);
         EditText keywordInput =  view.findViewById(R.id.keywordInput);
-        TextView keywordOutput =  view.findViewById(R.id.outputText);
 
 //        searchButton.setOnClickListener(new View.OnClickListener() {
 //            @Override

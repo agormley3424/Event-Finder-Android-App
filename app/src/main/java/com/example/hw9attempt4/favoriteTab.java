@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -73,12 +74,20 @@ public class favoriteTab extends Fragment {
                 "string9", "string10", "string11", "string12"));
     }
 
+    public eventObject dynamicAdd()
+    {
+        String bertieImage = "https://media.cdn.adultswim.com/uploads/20220829/thumbnails/2_228291541119-TucaAndBertie_310_TheMole.png";
+        return new eventObject(bertieImage, "stringA",
+                "stringB", "stringC", "stringD", "stringE");
+    }
+
+    // Class defined in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite_tab, container, false);
 
-        RecyclerView eventList = view.findViewById(R.id.resultList);
+        RecyclerView eventList = view.findViewById(R.id.favoriteList);
 
         createList();
 
@@ -86,7 +95,21 @@ public class favoriteTab extends Fragment {
 
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        eventArray.add(2, dynamicAdd());
+
+        adapter.notifyItemInserted(2);
+
+        eventArray.remove(2);
+
+        adapter.notifyItemRemoved(2);
+
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void removeFavorite(int index)
+    {
+        eventArray.remove(index);
     }
 }

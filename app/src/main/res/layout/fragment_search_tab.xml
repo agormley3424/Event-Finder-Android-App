@@ -164,13 +164,4 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/outputText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="69dp"
-        android:layout_marginBottom="602dp"
-        android:text="Your output here"
-        android:textColor="@color/green" />
-
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+
+// Class created in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
     Context context;
     ArrayList<eventObject> events;
@@ -56,6 +59,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         TextView eventTime;
         TextView eventCategory;
 
+        Button unfavorite;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -65,6 +70,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             eventDate = itemView.findViewById(R.id.eventDate);
             eventTime = itemView.findViewById(R.id.eventTime);
             eventCategory = itemView.findViewById(R.id.eventCategory);
+            unfavorite = itemView.findViewById(R.id.unfavoriteButton);
+
+            unfavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+
         }
     }
 }

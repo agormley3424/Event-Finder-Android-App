@@ -74,6 +74,7 @@ public class SearchResults extends Fragment {
 
     }
 
+    // Class defined in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
