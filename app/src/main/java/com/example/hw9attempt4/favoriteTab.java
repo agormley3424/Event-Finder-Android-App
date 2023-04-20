@@ -4,9 +4,14 @@ import android.os.Bundle;
 
 //import android.support.v4.app.Fragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,8 @@ public class favoriteTab extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<eventObject> eventArray = new ArrayList<eventObject>();
 
     public favoriteTab() {
         // Required empty public constructor
@@ -55,10 +62,31 @@ public class favoriteTab extends Fragment {
         }
     }
 
+    public void createList()
+    {
+        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
+        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
+        eventArray.add(new eventObject(bertieImage1, "string2",
+                "string3", "string4", "string5", "string6"));
+
+        eventArray.add(new eventObject(bertieImage2, "string8",
+                "string9", "string10", "string11", "string12"));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
+
+        RecyclerView eventList = view.findViewById(R.id.resultList);
+
+        createList();
+
+        RecyclerAdapter adapter = new RecyclerAdapter(this.getContext(), eventArray);
+
+        eventList.setAdapter(adapter);
+        eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_tab, container, false);
+        return view;
     }
 }

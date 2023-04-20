@@ -85,7 +85,8 @@ public class searchTab extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewDetails();
+                MainActivity activity = (MainActivity) getActivity();
+                activity.viewDetails();
             }
         });
 
@@ -97,11 +98,5 @@ public class searchTab extends Fragment {
             }
         });
         return view;
-    }
-
-    private void viewDetails()
-    {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.viewDetails();
     }
 }
