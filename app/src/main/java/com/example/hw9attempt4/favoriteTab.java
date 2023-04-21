@@ -67,7 +67,7 @@ public class favoriteTab extends Fragment {
     {
         String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
         String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
-        eventArray.add(new eventObject(bertieImage1, "string2",
+        eventArray.add(new eventObject(bertieImage1, "FAVORITES",
                 "string3", "string4", "string5", "string6"));
 
         eventArray.add(new eventObject(bertieImage2, "string8",
@@ -77,7 +77,7 @@ public class favoriteTab extends Fragment {
     public eventObject dynamicAdd()
     {
         String bertieImage = "https://media.cdn.adultswim.com/uploads/20220829/thumbnails/2_228291541119-TucaAndBertie_310_TheMole.png";
-        return new eventObject(bertieImage, "stringA",
+        return new eventObject(bertieImage, "FAVORITES",
                 "stringB", "stringC", "stringD", "stringE");
     }
 

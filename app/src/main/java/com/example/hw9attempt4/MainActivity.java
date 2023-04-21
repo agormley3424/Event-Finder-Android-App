@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 //        Fragment searchTab = new searchTab();
 //        Fragment favoriteTab = new favoriteTab();
 
-        adapter.addFragment(new searchTab(), getString(R.string.searchText));
+        adapter.addFragment(new SearchParentFragment(), getString(R.string.searchText));
         adapter.addFragment(new favoriteTab(), getString(R.string.favoriteText));
         //adapter.addFragment(new detailTab(), "Details");
         viewPager.setAdapter(adapter);
@@ -140,14 +140,37 @@ public class MainActivity extends AppCompatActivity {
     // Replaces the search fragment with the results fragment
     public void showSearchResults()
     {
-        mViewPager.getCurrentItem();
-        Fragment results = new SearchResults();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(mViewPager.getId(), results);
-        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.commit();
+        //R.id.searchTab
+        adapter.replaceFragment(0, new SearchResults());
+        //mViewPager.getAdapter().notifyDataSetChanged();
 
-        mViewPager.getAdapter().notifyDataSetChanged();
+        //adapter.addFragment(new searchTab(), "Search 2");
+//        adapter.removeFragment(0);
+//        mViewPager.getAdapter().notifyDataSetChanged();
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout.setupWithViewPager(mViewPager);
+//        tabLayout.removeAllTabs();
+//        tabLayout.
+
+        //adapter.addFragment(new SearchResults(), "Results");
+        //adapter.replaceFragment(1, new SearchResults());
+        //mViewPager.getAdapter().notifyDataSetChanged();
+
+        //mViewPager.getAdapter().replaceFragment(0, new SearchResults());
+//        adapter.replaceFragment(0, new SearchResults());
+//        adapter.notifyDataSetChanged();
+//        mViewPager.setAdapter(adapter);
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout.setupWithViewPager(mViewPager);
+
+//        mViewPager.getCurrentItem();
+//        Fragment results = new SearchResults();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(mViewPager.getId(), results);
+//        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
+//        transaction.commit();
+//
+//        mViewPager.getAdapter().notifyDataSetChanged();
 
 //        transaction
 //
