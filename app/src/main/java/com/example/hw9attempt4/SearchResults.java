@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -88,6 +89,16 @@ public class SearchResults extends Fragment {
 
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        Button backButton =  view.findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) getActivity();
+                activity.showSearchBox();
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }

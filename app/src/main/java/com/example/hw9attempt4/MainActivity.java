@@ -186,4 +186,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Replaces the search results fragment with the search box fragment
+    public void showSearchBox() {
+        adapter.replaceFragment(0, new searchTab());
+    }
+
+
 }
