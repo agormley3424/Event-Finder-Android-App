@@ -1,5 +1,7 @@
 package com.example.hw9attempt4;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,5 +34,9 @@ public class EventActivity extends AppCompatActivity {
         adapter.addFragment(new artistTab(), "Artist(s)");
         adapter.addFragment(new venueTab(), "Venue");
         viewPager.setAdapter(adapter);
+
+        Intent i = getIntent();
+        int testInt = i.getExtras().getInt("testInt");
+        System.out.println(testInt);
     }
 }

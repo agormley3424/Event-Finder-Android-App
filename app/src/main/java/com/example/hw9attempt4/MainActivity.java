@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private SectionPageAdapter adapter;
 
+    public int testValue = 2;
+
 //    public class MyAdapter extends SectionPageAdapter
 //    {
 //        static final int NUM_ITEMS = 2;
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public void viewDetails()
     {
         Intent switchActivityIntent = new Intent(this, EventActivity.class);
+        switchActivityIntent.putExtra("testInt", testValue);
         startActivity(switchActivityIntent);
     }
 
