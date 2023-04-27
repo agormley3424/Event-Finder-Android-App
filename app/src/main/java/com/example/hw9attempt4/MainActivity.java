@@ -1,14 +1,31 @@
 package com.example.hw9attempt4;
-import android.content.Intent;
-import android.os.Bundle;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.core.splashscreen.SplashScreen;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,84 +34,27 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private SectionPageAdapter adapter;
 
+    public String searchJSON;
+
     public int testValue = 2;
 
-//    public class MyAdapter extends SectionPageAdapter
-//    {
-//        static final int NUM_ITEMS = 2;
-//        private final FragmentManager mFragmentManager;
-//        private Fragment mFragmentAtPos0;
-//
-//        public MyAdapter(FragmentManager fm)
-//        {
-//            super(fm);
-//            mFragmentManager = fm;
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position)
-//        {
-//            if (position == 0)
-//            {
-//                if (mFragmentAtPos0 == null)
-//                {
-//                    mFragmentAtPos0 = new searchTab(new FirstPageFragmentListener()
-//                    {
-//                        public void onSwitchToNextFragment()
-//                        {
-//                            mFragmentManager.beginTransaction().remove(mFragmentAtPos0).commit();
-//                            mFragmentAtPos0 = new SearchResults();
-//                            notifyDataSetChanged();
-//                        }
-//                    });
-//                }
-//                return mFragmentAtPos0;
-//            }
-//            else
-//                return new favoriteTab();
-//        }
-//
-//        @Override
-//        public int getCount()
-//        {
-//            return NUM_ITEMS;
-//        }
-//
-//        @Override
-//        public int getItemPosition(Object object)
-//        {
-//            if (object instanceof searchTab && mFragmentAtPos0 instanceof SearchResults)
-//                return POSITION_NONE;
-//            return POSITION_UNCHANGED;
-//        }
-//    }
-//
-//    public interface FirstPageFragmentListener
-//    {
-//        void onSwitchToNextFragment();
-//    }
-
-        public class MyAdapter extends SectionPageAdapter
-    {
+    public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
         private Fragment mFragmentAtPos0;
 
-        public MyAdapter(FragmentManager fm)
-        {
+        public MyAdapter(FragmentManager fm) {
             super(fm);
             mFragmentManager = fm;
         }
 
         @Override
-        public int getCount()
-        {
+        public int getCount() {
             return NUM_ITEMS;
         }
 
         @Override
-        public int getItemPosition(Object object)
-        {
+        public int getItemPosition(Object object) {
 //            if (object instanceof searchTab && mFragmentAtPos0 instanceof SearchResults)
 //                return 0;
 //            return POSITION_UNCHANGED;
@@ -133,60 +93,79 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Sourced from 'https://learntodroid.com/how-to-switch-between-activities-in-android/'
-    public void viewDetails()
-    {
+    public void viewDetails() {
         Intent switchActivityIntent = new Intent(this, EventActivity.class);
         switchActivityIntent.putExtra("testInt", testValue);
         startActivity(switchActivityIntent);
     }
 
     // Replaces the search fragment with the results fragment
-    public void showSearchResults()
-    {
-        //R.id.searchTab
-        adapter.replaceFragment(0, new SearchResults());
-        //mViewPager.getAdapter().notifyDataSetChanged();
+    public void showSearchResults() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        //adapter.addFragment(new searchTab(), "Search 2");
-//        adapter.removeFragment(0);
-//        mViewPager.getAdapter().notifyDataSetChanged();
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        tabLayout.setupWithViewPager(mViewPager);
-//        tabLayout.removeAllTabs();
-//        tabLayout.
+        String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
+        stringDest += "keyword=" + ((TextView) findViewById(R.id.keywordInput)).getText();
+        stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
+        stringDest += "&category=" + ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
 
-        //adapter.addFragment(new SearchResults(), "Results");
-        //adapter.replaceFragment(1, new SearchResults());
-        //mViewPager.getAdapter().notifyDataSetChanged();
+        Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
 
-        //mViewPager.getAdapter().replaceFragment(0, new SearchResults());
+        if (autoDetect.isChecked()) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+
+                return;
+            }
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            stringDest += "&locationSearch=false";
+        }
+        else
+        {
+            String rawAddress = ((TextView) findViewById(R.id.locationInput)).getText().toString();
+            stringDest += "&location=" + stringToAddress(rawAddress);
+            stringDest += "&locationSearch=true";
+        }
+
+        System.out.println(stringDest);
+
+
+
 //        adapter.replaceFragment(0, new SearchResults());
-//        adapter.notifyDataSetChanged();
-//        mViewPager.setAdapter(adapter);
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        tabLayout.setupWithViewPager(mViewPager);
+//        RequestQueue queue = Volley.newRequestQueue(this);
 
-//        mViewPager.getCurrentItem();
-//        Fragment results = new SearchResults();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(mViewPager.getId(), results);
-//        transaction.setTransition(transaction.TRANSIT_FRAGMENT_OPEN);
-//        transaction.commit();
-//
-//        mViewPager.getAdapter().notifyDataSetChanged();
+    }
 
-//        transaction
-//
-//// Replace whatever is in the fragment_container view with this fragment
-//        transaction.replace(adapter.getItem(1).getId(), SearchResults.class, null);
-//
-//// Commit the transaction
-//        transaction.commit();
-//
-        //adapter.notifyDataSetChanged();
-//        adapter.addFragment(new FavoritesPage(), "Search");
-//        adapter.getItem(0).getId()
 
+    public String stringToAddress(String input)
+    {
+        String returnAddress = "";
+
+        for (int i = 0; i < input.length(); i++){
+            if (input.charAt(i) == ' '){
+                returnAddress += '+';
+            }
+            else
+            {
+                returnAddress += input.charAt(i);
+            }
+        }
+
+        return returnAddress;
+    }
+    public void getSearch(String url)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        searchJSON = response;
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //textView.setText("That didn't work!");
+            }
+        });
     }
 
     // Replaces the search results fragment with the search box fragment
