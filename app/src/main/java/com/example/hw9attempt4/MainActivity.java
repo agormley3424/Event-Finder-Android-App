@@ -119,7 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             }
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (userLocation == null)
+            {
+                userLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            }
+
+            stringDest += "&location=" + userLocation.getLongitude() + "," + userLocation.getLatitude();
+
             stringDest += "&locationSearch=false";
         } else {
             String rawAddress = ((TextView) findViewById(R.id.locationInput)).getText().toString();
@@ -172,45 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
     //get access to location permission
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_ASK_PERMISSIONS:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation();
-                } else {
-                    // Permission Denied
-                    Toast.makeText(this, "your message", Toast.LENGTH_SHORT)
-                            .show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    //Get location
-    public void getLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (myLocation == null)
-        {
-            myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-
-        }
-    }
 
 
 }
