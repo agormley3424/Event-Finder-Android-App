@@ -23,11 +23,16 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.core.splashscreen.SplashScreen;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -135,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         System.out.println(stringDest);
+        getSearch(stringDest);
+        System.out.println(searchJSON);
 
 
 //        adapter.replaceFragment(0, new SearchResults());
@@ -157,7 +164,9 @@ public class MainActivity extends AppCompatActivity {
         return returnAddress;
     }
 
-    public void getSearch(String url) {
+    // Code sourced from 'https://google.github.io/volley/request.html'
+
+    public void getString(String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -170,6 +179,51 @@ public class MainActivity extends AppCompatActivity {
                 //textView.setText("That didn't work!");
             }
         });
+
+        //MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getJSON(String url) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Select a JSONObject obj from an (unordered) JSONObject: JSONObject.getJSONObject("obj")
+                        // Select a JSONArray obj from an (unordered) JSONObject: JSONObject.getJSONArray("obc");
+                        // Select the 5th JSONObject from an (ordered) JSONArray: JSONArray.getJSONObject(5);
+                        // Select the 5th JSONArray from an (ordered) JSONArray: JSONArray.getJSONArray(5);
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        //MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void getJSONArray(String url) {
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        //MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
 
     // Replaces the search results fragment with the search box fragment
