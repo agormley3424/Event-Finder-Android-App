@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -112,15 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (autoDetect.isChecked()) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+                //requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 
                 return;
             }
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             stringDest += "&locationSearch=false";
-        }
-        else
-        {
+        } else {
             String rawAddress = ((TextView) findViewById(R.id.locationInput)).getText().toString();
             stringDest += "&location=" + stringToAddress(rawAddress);
             stringDest += "&locationSearch=true";
@@ -129,31 +130,27 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(stringDest);
 
 
-
 //        adapter.replaceFragment(0, new SearchResults());
 //        RequestQueue queue = Volley.newRequestQueue(this);
 
     }
 
 
-    public String stringToAddress(String input)
-    {
+    public String stringToAddress(String input) {
         String returnAddress = "";
 
-        for (int i = 0; i < input.length(); i++){
-            if (input.charAt(i) == ' '){
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ' ') {
                 returnAddress += '+';
-            }
-            else
-            {
+            } else {
                 returnAddress += input.charAt(i);
             }
         }
 
         return returnAddress;
     }
-    public void getSearch(String url)
-    {
+
+    public void getSearch(String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -171,6 +168,48 @@ public class MainActivity extends AppCompatActivity {
     // Replaces the search results fragment with the search box fragment
     public void showSearchBox() {
         adapter.replaceFragment(0, new searchTab());
+    }
+
+    //get access to location permission
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation();
+                } else {
+                    // Permission Denied
+                    Toast.makeText(this, "your message", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    //Get location
+    public void getLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (myLocation == null)
+        {
+            myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        }
     }
 
 
