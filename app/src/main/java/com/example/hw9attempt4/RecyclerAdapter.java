@@ -33,6 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_single_result, parent, false);
 
+
         return new RecyclerAdapter.MyViewHolder(view);
     }
 
@@ -76,10 +77,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             eventName.setSelected(true);
             eventVenue.setSelected(true);
 
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("Hello");
+                    MainActivity activity = (MainActivity) itemView.getContext();
+                    activity.viewDetails(5);
                 }
             });
 
