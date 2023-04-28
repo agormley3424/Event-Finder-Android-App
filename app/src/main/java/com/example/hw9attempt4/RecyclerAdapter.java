@@ -72,10 +72,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             eventCategory = itemView.findViewById(R.id.eventCategory);
             unfavorite = itemView.findViewById(R.id.unfavoriteButton);
 
-            unfavorite.setOnClickListener(new View.OnClickListener() {
+            eventCategory.setSelected(true);
+            eventName.setSelected(true);
+            eventVenue.setSelected(true);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    System.out.println("Hello");
                 }
             });
 
