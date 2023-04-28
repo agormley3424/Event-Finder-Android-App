@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private SectionPageAdapter adapter;
 
-    public String searchJSON;
+    //public String searchJSON;
+
+    public JSONObject searchJSON;
 
     public int testValue = 2;
 
@@ -111,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    public void viewSearchResults()
+    {
+        adapter.replaceFragment(0, new SearchResults());
+    }
+
     // Replaces the search fragment with the results fragment
     public void showSearchResults() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -150,11 +157,6 @@ public class MainActivity extends AppCompatActivity {
        // System.out.println(stringDest);
         //getSearch(stringDest);
         //System.out.println(searchJSON);
-
-
-//        adapter.replaceFragment(0, new SearchResults());
-//        RequestQueue queue = Volley.newRequestQueue(this);
-
     }
 
 
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        searchJSON = response;
+                        //searchJSON = response;
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -189,8 +191,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         queue.add(stringRequest);
-
-        //MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     public void getJSON(String url) {
@@ -199,11 +199,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        int i = 5;
-                        // Select a JSONObject obj from an (unordered) JSONObject: JSONObject.getJSONObject("obj")
-                        // Select a JSONArray obj from an (unordered) JSONObject: JSONObject.getJSONArray("obc");
-                        // Select the 5th JSONObject from an (ordered) JSONArray: JSONArray.getJSONObject(5);
-                        // Select the 5th JSONArray from an (ordered) JSONArray: JSONArray.getJSONArray(5);
+                        searchJSON = response;
+                        viewSearchResults();
                     }
                 }, new Response.ErrorListener() {
 
@@ -215,8 +212,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         queue.add(jsonObjectRequest);
-
-        //MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void getJSONArray(String url) {
@@ -238,8 +233,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         queue.add(jsonArrayRequest);
-
-        //MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
 
     // Replaces the search results fragment with the search box fragment

@@ -85,17 +85,18 @@ public class searchTab extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity activity = (MainActivity) getActivity();
-                activity.viewDetails();
-            }
-        });
-
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity activity = (MainActivity) getActivity();
+                //activity.viewDetails();
                 activity.showSearchResults();
             }
         });
+
+//        clearButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MainActivity activity = (MainActivity) getActivity();
+//                activity.showSearchResults();
+//            }
+//        });
         return view;
     }
 }

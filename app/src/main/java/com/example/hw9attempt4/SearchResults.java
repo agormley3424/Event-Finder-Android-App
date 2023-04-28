@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -31,19 +35,81 @@ public class SearchResults extends Fragment {
 
     private ArrayList<eventObject> eventArray = new ArrayList<eventObject>();
 
+    private MainActivity activity;
+
     public SearchResults() {
         // Required empty public constructor
     }
 
-    public void createList()
-    {
-        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
-        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
-        eventArray.add(new eventObject(bertieImage1, "SEARCH RESULTS",
-                "string3", "string4", "string5", "string6"));
+    public void createList(JSONObject resultJSON) throws JSONException {
+        // Select a JSONObject obj from an (unordered) JSONObject: JSONObject.getJSONObject("obj")
+        // Select a JSONArray obj from an (unordered) JSONObject: JSONObject.getJSONArray("obc");
+        // Select a String obj from an (unordered) JSONObject: JSONObject.getString("obj");
+        // Select the 5th JSONObject from an (ordered) JSONArray: JSONArray.getJSONObject(5);
+        // Select the 5th JSONArray from an (ordered) JSONArray: JSONArray.getJSONArray(5);
+        // Select the 5th String from an (ordered) JSONArray: JSONArray.getString(5);
 
-        eventArray.add(new eventObject(bertieImage2, "string8",
-                "string9", "string10", "string11", "string12"));
+        JSONObject obj = resultJSON.getJSONObject("_embedded");
+        JSONArray eventList = resultJSON.getJSONObject("_embedded").getJSONArray("events");
+
+        for (int i = 0; i < eventList.length(); ++i)
+        {
+            JSONObject detailRow = eventList.getJSONObject(i);
+
+            String imageURL = null;
+            try {
+                imageURL = detailRow.getJSONArray("images").getJSONObject(0).getString("url");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String eventName = null;
+            try {
+                eventName = detailRow.getString("name");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String venue = null;
+            try {
+                venue = detailRow.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getString("name");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String category = null;
+            try {
+                category = detailRow.getJSONArray("classifications").getJSONObject(0).getJSONObject("segment").getString("name");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String date = null;
+            try {
+                date = detailRow.getJSONObject("dates").getJSONObject("start").getString("localDate");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String time = null;
+            try {
+                time = detailRow.getJSONObject("dates").getJSONObject("start").getString("localTime");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time));
+        }
+
+//        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
+//        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
+//        eventArray.add(new eventObject(bertieImage1, "SEARCH RESULTS",
+//                "string3", "string4", "string5", "string6"));
+//
+//        eventArray.add(new eventObject(bertieImage2, "string8",
+//                "string9", "string10", "string11", "string12"));
     }
 
     /**
@@ -67,6 +133,7 @@ public class SearchResults extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -81,9 +148,16 @@ public class SearchResults extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
+        activity = (MainActivity) getActivity();
+
         RecyclerView eventList = view.findViewById(R.id.resultList);
 
-        createList();
+        try {
+            createList(activity.searchJSON);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+        }
 
         RecyclerAdapter adapter = new RecyclerAdapter(this.getContext(), eventArray);
 
@@ -94,7 +168,6 @@ public class SearchResults extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity activity = (MainActivity) getActivity();
                 activity.showSearchBox();
             }
         });
