@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +59,19 @@ public class SingleResult extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_single_result, container, false);
+
+        TextView eventName =  view.findViewById(R.id.eventName);
+        eventName.setSelected(true);
+
+        TextView eventVenue =  view.findViewById(R.id.eventVenue);
+        eventVenue.setSelected(true);
+
+        TextView eventCategory =  view.findViewById(R.id.eventCategory);
+        eventCategory.setSelected(true);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_result, container, false);
+        return view;
     }
 }

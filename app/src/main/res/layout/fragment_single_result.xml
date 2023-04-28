@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/eventName"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -32,29 +32,32 @@
         android:textColor="@color/grey"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:theme="@style/marquee"
         app:layout_constraintStart_toEndOf="@+id/eventImage"
         app:layout_constraintTop_toTopOf="@+id/eventImage" />
 
     <TextView
         android:id="@+id/eventVenue"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Venue here"
         android:textColor="@color/grey"
         android:textSize="18sp"
+        android:theme="@style/marquee"
         app:layout_constraintStart_toStartOf="@+id/eventName"
         app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
     <TextView
         android:id="@+id/eventCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="10dp"
         android:text="Category here"
         android:textColor="@color/grey"
         android:textSize="18sp"
+        android:theme="@style/marquee"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/eventVenue"
         app:layout_constraintTop_toBottomOf="@+id/eventVenue" />

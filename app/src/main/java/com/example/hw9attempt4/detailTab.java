@@ -63,10 +63,10 @@ public class detailTab extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detail_tab, container, false);
-        TextView detailArtists =  view.findViewById(R.id.venueName);
+        TextView detailArtists =  view.findViewById(R.id.venueArtists);
         detailArtists.setSelected(true);
 
-        TextView detailVenue = view.findViewById(R.id.venueAddress);
+        TextView detailVenue = view.findViewById(R.id.venueName);
         detailVenue.setSelected(true);
 
         TextView detailDate = view.findViewById(R.id.venueCityState);
