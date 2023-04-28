@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     public int testValue = 2;
 
+    private RequestQueue queue;
+
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
@@ -85,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        this.queue = Volley.newRequestQueue(this);
+
         requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
     }
 
@@ -114,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + ((TextView) findViewById(R.id.keywordInput)).getText();
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
-        stringDest += "&category=" + ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
+        String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
+        stringDest += "&category=" + catString.toLowerCase();
 
         Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
 
@@ -139,9 +144,12 @@ public class MainActivity extends AppCompatActivity {
             stringDest += "&locationSearch=true";
         }
 
-        System.out.println(stringDest);
-        getSearch(stringDest);
-        System.out.println(searchJSON);
+        getJSON(stringDest);
+        //getString(stringDest);
+
+       // System.out.println(stringDest);
+        //getSearch(stringDest);
+        //System.out.println(searchJSON);
 
 
 //        adapter.replaceFragment(0, new SearchResults());
@@ -180,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        queue.add(stringRequest);
+
         //MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
@@ -189,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        int i = 5;
                         // Select a JSONObject obj from an (unordered) JSONObject: JSONObject.getJSONObject("obj")
                         // Select a JSONArray obj from an (unordered) JSONObject: JSONObject.getJSONArray("obc");
                         // Select the 5th JSONObject from an (ordered) JSONArray: JSONArray.getJSONObject(5);
@@ -203,15 +214,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        queue.add(jsonObjectRequest);
+
         //MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void getJSONArray(String url) {
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
+                        int i = 5;
 
                     }
                 }, new Response.ErrorListener() {
@@ -222,6 +236,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
+        queue.add(jsonArrayRequest);
 
         //MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
