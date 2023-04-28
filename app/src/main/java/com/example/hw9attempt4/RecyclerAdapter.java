@@ -45,6 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.eventVenue.setText(events.get(position).venue);
         holder.eventCategory.setText(events.get(position).category);
         Picasso.get().load(events.get(position).imageURL).into(holder.eventImage);
+        holder.position = holder.getAdapterPosition();
+        holder.imageURL = events.get(position).imageURL;
     }
 
     @Override
@@ -53,7 +55,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+        int position;
         ImageView eventImage;
+        String imageURL;
         TextView eventName;
         TextView eventVenue;
         TextView eventDate;
@@ -83,7 +87,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     MainActivity activity = (MainActivity) itemView.getContext();
-                    activity.viewDetails(5);
+                    activity.viewDetails(position);
                 }
             });
 

@@ -107,9 +107,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Sourced from 'https://learntodroid.com/how-to-switch-between-activities-in-android/'
-    public void viewDetails(int test) {
+    public void viewDetails(int position) {
         Intent switchActivityIntent = new Intent(this, EventActivity.class);
-        switchActivityIntent.putExtra("testInt", test);
+        switchActivityIntent.putExtra("position", position);
+        switchActivityIntent.putExtra("JSON", searchJSON.toString());
         startActivity(switchActivityIntent);
     }
 

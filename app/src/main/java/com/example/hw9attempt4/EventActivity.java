@@ -9,6 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class EventActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
@@ -36,7 +39,14 @@ public class EventActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         Intent i = getIntent();
-        int testInt = i.getExtras().getInt("testInt");
-        System.out.println(testInt);
+        int position = i.getExtras().getInt("position");
+
+        JSONObject searchJSON = null;
+
+        try {
+            searchJSON = new JSONObject(i.getExtras().getString("JSON"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
