@@ -16,6 +16,8 @@ public class EventActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
+    public JSONObject eventJSON;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,11 @@ public class EventActivity extends AppCompatActivity {
         Intent i = getIntent();
         int position = i.getExtras().getInt("position");
 
-        JSONObject searchJSON = null;
+        eventJSON = null;
 
         try {
-            searchJSON = new JSONObject(i.getExtras().getString("JSON"));
+            eventJSON = new JSONObject(i.getExtras().getString("JSON"));
+            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(position);
         } catch (JSONException e) {
             e.printStackTrace();
         }
