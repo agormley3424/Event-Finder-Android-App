@@ -47,7 +47,7 @@ public class EventActivity extends AppCompatActivity {
 
         try {
             eventJSON = new JSONObject(i.getExtras().getString("JSON"));
-            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(position);
+            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("artists").getJSONObject(position);
         } catch (JSONException e) {
             e.printStackTrace();
         }

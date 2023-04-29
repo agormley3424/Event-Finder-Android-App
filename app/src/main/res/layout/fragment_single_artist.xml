@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/artistProfile3"
+        android:id="@+id/artistAlbum2"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="132dp"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/artistProfile2"
+        android:id="@+id/artistAlbum1"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="4dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/artistProfile4"
+        android:id="@+id/artistAlbum3"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="260dp"
