@@ -125,7 +125,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/venueArtists"
+                    android:id="@+id/venueName2"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Venue name here"
@@ -135,13 +135,13 @@
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <TextView
-                    android:id="@+id/venueName"
+                    android:id="@+id/venueAddress"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Address here"
                     android:theme="@style/greenTextTheme"
-                    app:layout_constraintEnd_toEndOf="@id/venueArtists"
-                    app:layout_constraintStart_toStartOf="@id/venueArtists"
+                    app:layout_constraintEnd_toEndOf="@id/venueName2"
+                    app:layout_constraintStart_toStartOf="@id/venueName2"
                     app:layout_constraintTop_toTopOf="@+id/textView" />
 
                 <TextView
@@ -150,9 +150,9 @@
                     android:layout_height="wrap_content"
                     android:text="City / State Here"
                     android:theme="@style/greenTextTheme"
-                    app:layout_constraintEnd_toEndOf="@+id/venueName"
+                    app:layout_constraintEnd_toEndOf="@+id/venueAddress"
                     app:layout_constraintHorizontal_bias="0.818"
-                    app:layout_constraintStart_toStartOf="@+id/venueName"
+                    app:layout_constraintStart_toStartOf="@+id/venueAddress"
                     app:layout_constraintTop_toTopOf="@+id/textViewWhatever" />
 
                 <TextView

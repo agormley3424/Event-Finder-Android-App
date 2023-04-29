@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -82,6 +86,94 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_venue_tab, container, false);
+
+        EventActivity activity = (EventActivity) getActivity();
+        JSONObject eventJSON = activity.eventJSON;
+
+
+        TextView venueName = view.findViewById(R.id.venueName2);
+        venueName.setSelected(true);
+
+        try {
+            venueName.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getString("name"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueName.setText("No name found");
+        }
+
+        TextView venueAddress = view.findViewById(R.id.venueAddress);
+        venueAddress.setSelected(true);
+
+        try {
+            venueAddress.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("address").getString("line1"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueAddress.setText("No address found");
+        }
+
+        TextView venueCityState = view.findViewById(R.id.venueCityState);
+        venueCityState.setSelected(true);
+
+        String cityState = "";
+
+        try {
+            cityState += eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("city").getString("name");
+            cityState += ", ";
+        } catch (JSONException e) {
+            e.printStackTrace();
+            cityState += "Unknown City, ";
+        }
+
+        try {
+            cityState += eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("state").getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            cityState += "Unknown State";
+        }
+
+        venueCityState.setText(cityState);
+
+        TextView venueContact = view.findViewById(R.id.venueContact);
+        venueContact.setSelected(true);
+
+        try {
+            venueContact.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("boxOfficeInfo").getString("phoneNumberDetail"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueContact.setText("No contact number found");
+        }
+
+
+        TextView venueHours = view.findViewById(R.id.venueHours);
+        venueHours.setSelected(true);
+
+        try {
+            venueHours.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("boxOfficeInfo").getString("openHoursDetail"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueHours.setText("No hours found");
+        }
+
+        TextView venueGeneralRules = view.findViewById(R.id.venueGeneralRules);
+        venueGeneralRules.setSelected(true);
+
+        try {
+            venueGeneralRules.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("generalInfo").getString("generalRule"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueGeneralRules.setText("No general rules found");
+        }
+
+        TextView venueChildRules = view.findViewById(R.id.venueChildRules);
+        venueChildRules.setSelected(true);
+
+        try {
+            venueChildRules.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("generalInfo").getString("childRule"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            venueChildRules.setText("No child rules found");
+        }
+
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
