@@ -209,7 +209,7 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 10));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 17));
                 googleMap.addMarker(pin);
             }
         });
