@@ -1,6 +1,8 @@
 package com.example.hw9attempt4;
 
 import android.content.Context;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,7 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
     public void onBindViewHolder(@NonNull ArtistRecycler.MyViewHolder holder, int position) {
         holder.name.setText(artists.get(position).name);
         holder.followers.setText(artists.get(position).followers);
-        holder.spotifyLink.setText(artists.get(position).spotifyLink);
+        holder.spotifyLink.setText("Check out on Spotify " + artists.get(position).spotifyLink);
         holder.popularity.setText(artists.get(position).popularity);
         Picasso.get().load(artists.get(position).profileImage).into(holder.profile);
         Picasso.get().load(artists.get(position).album1).into(holder.album1);
@@ -69,11 +71,15 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
             name.setSelected(true);
             followers = itemView.findViewById(R.id.artistFollowers);
             spotifyLink = itemView.findViewById(R.id.artistLink);
-            popularity = itemView.findViewById(R.id.artistPopularity);
+            popularity = itemView.findViewById(R.id.artistRank);
             profile = itemView.findViewById(R.id.artistProfile);
             album1 = itemView.findViewById(R.id.artistAlbum1);
             album2 = itemView.findViewById(R.id.artistAlbum2);
             album3 = itemView.findViewById(R.id.artistAlbum3);
+
+            spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
+
+            //Linkify.addLinks(spotifyLink, Linkify.WEB_URLS);
         }
     }
 }
