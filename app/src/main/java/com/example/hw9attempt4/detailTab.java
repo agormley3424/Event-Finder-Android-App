@@ -228,6 +228,7 @@ public class detailTab extends Fragment {
         }
         else
         {
+            priceText += " (USD)";
             detailPrice.setText(priceText);
         }
 
