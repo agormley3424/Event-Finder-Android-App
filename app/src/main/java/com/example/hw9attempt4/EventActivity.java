@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
@@ -47,9 +49,11 @@ public class EventActivity extends AppCompatActivity {
 
         try {
             eventJSON = new JSONObject(i.getExtras().getString("JSON"));
-            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("artists").getJSONObject(position);
+            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(position);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        int x = 1;
     }
 }

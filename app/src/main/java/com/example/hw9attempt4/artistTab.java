@@ -11,17 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import com.google.gson.Gson;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +52,7 @@ public class artistTab extends Fragment {
 
     private EventActivity activity;
 
-    private RequestQueue queue;
+    //private RequestQueue queue;
 
     private boolean artistFound;
 
@@ -51,7 +60,7 @@ public class artistTab extends Fragment {
 
     private boolean abort;
 
-    private ArtistObject currentArtist;
+    private ArtistObject newArtist;
 
     public artistTab() {
         // Required empty public constructor
@@ -84,77 +93,6 @@ public class artistTab extends Fragment {
         }
     }
 
-    public void createList(JSONObject resultJSON) throws JSONException {
-        // Select a JSONObject obj from an (unordered) JSONObject: JSONObject.getJSONObject("obj")
-        // Select a JSONArray obj from an (unordered) JSONObject: JSONObject.getJSONArray("obc");
-        // Select a String obj from an (unordered) JSONObject: JSONObject.getString("obj");
-        // Select the 5th JSONObject from an (ordered) JSONArray: JSONArray.getJSONObject(5);
-        // Select the 5th JSONArray from an (ordered) JSONArray: JSONArray.getJSONArray(5);
-        // Select the 5th String from an (ordered) JSONArray: JSONArray.getString(5);
-
-        JSONObject obj = resultJSON.getJSONObject("_embedded");
-        JSONArray eventList = resultJSON.getJSONObject("_embedded").getJSONArray("events");
-
-        for (int i = 0; i < eventList.length(); ++i)
-        {
-            JSONObject detailRow = eventList.getJSONObject(i);
-
-            String imageURL = null;
-            try {
-                imageURL = detailRow.getJSONArray("images").getJSONObject(0).getString("url");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String eventName = null;
-            try {
-                eventName = detailRow.getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String venue = null;
-            try {
-                venue = detailRow.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String category = null;
-            try {
-                category = detailRow.getJSONArray("classifications").getJSONObject(0).getJSONObject("segment").getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String date = null;
-            try {
-                date = detailRow.getJSONObject("dates").getJSONObject("start").getString("localDate");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String time = null;
-            try {
-                time = detailRow.getJSONObject("dates").getJSONObject("start").getString("localTime");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time));
-        }
-
-//        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
-//        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
-//        eventArray.add(new eventObject(bertieImage1, "SEARCH RESULTS",
-//                "string3", "string4", "string5", "string6"));
-//
-//        eventArray.add(new eventObject(bertieImage2, "string8",
-//                "string9", "string10", "string11", "string12"));
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -165,13 +103,10 @@ public class artistTab extends Fragment {
 
         RecyclerView artistList = view.findViewById(R.id.artistList);
 
-
-        ArtistRecycler adapter = new ArtistRecycler(this.getContext(), artistArray);
-
-        artistList.setAdapter(adapter);
-        artistList.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
         JSONObject eventJSON = activity.eventJSON;
+
+        //this.queue = Volley.newRequestQueue(this.getContext());
+
 
         try {
             JSONArray artists = eventJSON.getJSONObject("_embedded").getJSONArray("attractions");
@@ -181,33 +116,57 @@ public class artistTab extends Fragment {
                 artistFound = false;
                 albumsFound = false;
                 abort = false;
-                currentArtist = new ArtistObject();
+                //currentArtist = new ArtistObject();
 
-                String requestString = "https://hw8-380107.wl.r.appspot.com/spotify?artist=";
-                String artistName = artists.getJSONObject(i).getString("name");
-                requestString += artistName;
-                artistRequest(requestString, artistName);
+                final String artistName = artists.getJSONObject(i).getString("name");
+                final String requestString = "https://hw8-380107.wl.r.appspot.com/spotify?artist=" + artistName;
 
-                while (!abort && (!artistFound || !albumsFound));
 
-                if (!abort)
-                {
-                    artistArray.add(currentArtist);
-                }
+                Thread thread = new Thread(() -> {
+                    RequestQueue queue = Volley.newRequestQueue(this.getContext());
+                    artistRequest(requestString, artistName, new ArtistObject(), queue, artistList);
+                    //multiThreadRequest(requestString, artistName, new ArtistObject(), queue);
+                });
+
+                thread.start();
+
+
+
+                //while (!albumsFound);
+
+                int x = 1;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+//        ArtistRecycler adapter = new ArtistRecycler(this.getContext(), artistArray);
+//
+//        artistList.setAdapter(adapter);
+//        artistList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void artistRequest(String url, String targetName)
+    public void artistRequest(String url, String targetName, ArtistObject newArtist, RequestQueue queue, RecyclerView artistList)
     {
+        int i = 1;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+//                    @Override
+//                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+//                        try {
+//                            String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+//                            JSONObject jsonObject = new JSONObject(jsonString);
+//                            return Response.success(jsonObject, HttpHeaderParser.parseCacheHeaders(response));
+//                        } catch (JSONException | UnsupportedEncodingException e) {
+//                            return Response.error(new ParseError(e));
+//                        }
+//                    }
+
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -231,7 +190,7 @@ public class artistTab extends Fragment {
 
                             if (innerName.equals(targetName))
                             {
-                                addArtist(response, i);
+                                addArtist(response, i, newArtist, queue, artistList);
                                 return;
                             }
                         }
@@ -250,14 +209,14 @@ public class artistTab extends Fragment {
         queue.add(jsonObjectRequest);
     }
 
-    public void albumRequest(String url)
+    public void albumRequest(String url, ArtistObject newArtist, RequestQueue queue, RecyclerView artistList)
     {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        addAlbums(response);
+                        addAlbums(response, newArtist, artistList);
                     }
                 }, new Response.ErrorListener() {
 
@@ -273,20 +232,21 @@ public class artistTab extends Fragment {
 
 
     // Add a new artist to the artist array
-    public void addArtist(JSONObject response, int position)
+    public void addArtist(JSONObject response, int position, ArtistObject newArtist, RequestQueue queue, RecyclerView artistList)
     {
         JSONObject artistJSON;
         try {
             artistJSON = response.getJSONObject("artists").getJSONArray("items").getJSONObject(position);
 
             String albumString = "https://hw8-380107.wl.r.appspot.com/spotifyAlbums?artistID=" + artistJSON.getString("id");
-            albumRequest(albumString);
 
-            currentArtist.name = artistJSON.getString("name");
-            currentArtist.followers = artistJSON.getJSONObject("followers").getString("total");
-            currentArtist.popularity = artistJSON.getString("popularity");
-            currentArtist.spotifyLink = artistJSON.getJSONObject("external_urls").getString("spotify");
-            currentArtist.profileImage = artistJSON.getJSONArray("images").getJSONObject(0).getString("url");
+            newArtist.name = artistJSON.getString("name");
+            newArtist.followers = artistJSON.getJSONObject("followers").getString("total");
+            newArtist.popularity = artistJSON.getString("popularity");
+            newArtist.spotifyLink = artistJSON.getJSONObject("external_urls").getString("spotify");
+            newArtist.profileImage = artistJSON.getJSONArray("images").getJSONObject(0).getString("url");
+
+            albumRequest(albumString, newArtist, queue, artistList);
 
             artistFound = true;
 
@@ -297,17 +257,63 @@ public class artistTab extends Fragment {
         }
     }
 
-    public void addAlbums(JSONObject response)
+    public void addAlbums(JSONObject response, ArtistObject newArtist, RecyclerView artistList)
     {
         try {
-            currentArtist.album1 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(0).getString("url");
-            currentArtist.album2 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(1).getString("url");
-            currentArtist.album3 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(2).getString("url");
+            newArtist.album1 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(0).getString("url");
+            newArtist.album2 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(1).getString("url");
+            newArtist.album3 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(2).getString("url");
+
+            artistArray.add(newArtist);
+
 
             albumsFound = true;
+
+            ArtistRecycler adapter = new ArtistRecycler(this.getContext(), artistArray);
+
+            artistList.setAdapter(adapter);
+            artistList.setLayoutManager(new LinearLayoutManager(this.getContext()));
         } catch (JSONException e) {
             e.printStackTrace();
             abort = true;
         }
     }
+
+//    public void multiThreadRequest(String url, String targetName, ArtistObject newArtist, RequestQueue queue) {
+//        Runnable blockingRequest = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                RequestFuture<JSONObject> future = RequestFuture.newFuture();
+//                JsonObjectRequest request = new JsonObjectRequest(url, new JSONObject(), future, future);
+//                queue.add(request);
+//
+//                try {
+//                    JSONObject response = future.get(); // this will block
+//                    int i = 1;
+//                    System.out.println("Hello asynchronous world!");
+//                } catch (InterruptedException e) {
+//                    // exception handling
+//                } catch (ExecutionException e) {
+//                    // exception handling
+//                }
+//            }
+//        };
+//    }
+
+//    public void multiThreadRequest(String url, String targetName, ArtistObject newArtist, RequestQueue queue)
+//    {
+//        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+//        JsonObjectRequest request = new JsonObjectRequest(url, new JSONObject(), future, future);
+//        queue.add(request);
+//
+//        try {
+//            JSONObject response = future.get();
+//            System.out.println("Hello asynchronous world!");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
