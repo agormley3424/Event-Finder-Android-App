@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -182,7 +183,36 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
         mMapView = view.findViewById(R.id.venueMap);
         mMapView.onCreate(mapViewBundle);
 
-        mMapView.getMapAsync(this);
+        float lat;
+
+        try {
+            lat = Float.parseFloat(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("location").getString("latitude"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            mMapView.setVisibility(MapView.GONE);
+            return view;
+        }
+
+        float lon;
+
+        try {
+            lon = Float.parseFloat(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("location").getString("longitude"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            mMapView.setVisibility(MapView.GONE);
+            return view;
+        }
+
+        final LatLng center = new LatLng(lat, lon);
+        final MarkerOptions pin = new MarkerOptions().position(center);
+
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 10));
+                googleMap.addMarker(pin);
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
