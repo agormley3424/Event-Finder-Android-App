@@ -2,6 +2,7 @@ package com.example.hw9attempt4;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -28,11 +29,18 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import androidx.core.splashscreen.SplashScreen;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
     public int testValue = 2;
 
     private RequestQueue queue;
+
+    //public eventObject[] favorites = new eventObject[0];
+
+    //public ArrayList<eventObject> favorites = new ArrayList<eventObject>();
+
+    public List<eventObject> favorites = new ArrayList<eventObject>();
+
+    public SharedPreferences prefs;
+
+    private Gson gson = new Gson();
 
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
@@ -82,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        prefs = getPreferences(MODE_PRIVATE);
+
         // set up the view pager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
@@ -92,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
         this.queue = Volley.newRequestQueue(this);
 
         requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+
+        loadFavorites();
+        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
+                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
+        saveFavorites();
+        //clearFavorites();
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -243,6 +269,73 @@ public class MainActivity extends AppCompatActivity {
 
     //get access to location permission
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    public void saveFavorites()
+    {
+        /* Attempt to save files using SharedPreferences*/
+
+        /* Sourced from https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android */
+
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        //List<eventObject> favoriteList = Arrays.asList(favorites);
+        //eventObject[] simpleFavorites = (eventObject[]) favoriteList;
+        String jsonFavorites = gson.toJson(favorites);
+        prefsEditor.putString("favoritesList", jsonFavorites);
+        prefsEditor.commit();
+
+
+
+        /* Attempt to save files using a Proto DataStore*/
+
+        /* Attempt to save files using a Java FileOutputStream */
+//        try {
+//            FileOutputStream f = openFileOutput("favoritesList", MODE_PRIVATE);
+//            String byteArray = favorites.toArray().toString();
+//            byteArray.getBytes();
+//
+//            eventObject[] simpleFavorites = (eventObject[]) favorites.toArray();
+//            simpleFavorites.
+//            byte[] byteFavorites = (byte[]) favorites.toArray();
+//            f.write(favorites.toString().getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    public void loadFavorites()
+    {
+        /* Sourced from https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android */
+
+        String jsonFavorites = prefs.getString("favoritesList", "[]");
+
+        favorites = (gson.fromJson(jsonFavorites, List.class));
+        //eventObject[] simpleFavorites = (gson.fromJson(jsonFavorites, eventObject[].class));
+        //This line, 309, is bugging out. Need to figure out how to cast this correctly
+        //List favoriteList = Arrays.asList(simpleFavorites);
+
+        //favorites = (ArrayList) favoriteList;
+        //favorites = new ArrayList<eventObject>(favoriteList);
+        int i = 1;
+    }
+
+    public void clearFavorites()
+    {
+        favorites = new ArrayList<eventObject>();
+
+        saveFavorites();
+
+        int i = 1;
+    }
+
+    public void addFavorite(eventObject event)
+    {
+        favorites.add(event);
+    }
+
+    public void removeFavorite(int i)
+    {
+        favorites.remove(i);
+    }
 
 
 }
