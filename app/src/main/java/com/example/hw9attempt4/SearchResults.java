@@ -98,9 +98,14 @@ public class SearchResults extends Fragment {
                 e.printStackTrace();
             }
 
+            String id = null;
+            try {
+                id = detailRow.getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-
-            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time));
+            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time, id));
         }
 
 //        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
@@ -158,6 +163,10 @@ public class SearchResults extends Fragment {
             e.printStackTrace();
             //throw new RuntimeException(e);
         }
+
+
+
+        activity.updateEvents(this.eventArray);
 
         RecyclerAdapter adapter = new RecyclerAdapter(this.getContext(), eventArray);
 

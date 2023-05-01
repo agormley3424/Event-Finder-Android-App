@@ -141,7 +141,7 @@ public class EventActivity extends AppCompatActivity {
 
         MenuItem favoriteButton = menu.findItem(R.id.favoriteButton);
 
-        favoriteButton.setIcon(R.drawable.heart_filled);
+        //favoriteButton.setIcon(R.drawable.heart_filled);
 
         View v = findViewById(R.id.favoriteButton);
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +49,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         Picasso.get().load(events.get(position).imageURL).into(holder.eventImage);
         holder.position = holder.getAdapterPosition();
         holder.imageURL = events.get(position).imageURL;
+        holder.id = events.get(position).id;
+
+        final MainActivity activity = (MainActivity) holder.itemView.getContext();
+        ImageButton favorite = holder.favorite;
+
+        if (activity.isFavorited(holder.id))
+            {
+                favorite.setImageResource(R.drawable.heart_filled);
+            }
+        else
+            {
+                favorite.setImageResource(R.drawable.heart_outline);
+            }
     }
 
     @Override
@@ -65,13 +79,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         TextView eventTime;
         TextView eventCategory;
 
-        Button favorite;
+        ImageButton favorite;
+
+        String id;
 
         public MyViewHolder(@NonNull View itemView,ArrayList<eventObject> paramEvents) {
             super(itemView);
-
-            ArrayList<eventObject> events = paramEvents;
-
             eventImage = itemView.findViewById(R.id.eventImage);
             eventName = itemView.findViewById(R.id.eventName);
             eventVenue = itemView.findViewById(R.id.eventVenue);
@@ -84,12 +97,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             eventName.setSelected(true);
             eventVenue.setSelected(true);
 
-
+            final MainActivity activity = (MainActivity) itemView.getContext();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity activity = (MainActivity) itemView.getContext();
                     activity.viewDetails(position);
                 }
             });
@@ -98,10 +110,38 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ArrayList<eventObject> events = paramEvents;
                     MainActivity activity = (MainActivity) itemView.getContext();
                     activity.addFavorite(events.get(position), position);
                 }
             });
+
+            // Store this object as a new favorite
+            favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean isFavorited = activity.isFavorited(id);
+                    if (isFavorited)
+                    {
+                        favorite.setImageResource(R.drawable.heart_outline);
+                        activity.removeFavorite(id);
+                    }
+                    else
+                    {
+                        favorite.setImageResource(R.drawable.heart_filled);
+                        activity.addFavorite(position);
+                    }
+                }
+            });
+
+//            if (activity.isFavorited(id))
+//            {
+//                favorite.setImageResource(R.drawable.heart_filled);
+//            }
+//            else
+//            {
+//                favorite.setImageResource(R.drawable.heart_outline);
+//            }
 
 
         }

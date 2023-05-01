@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     public List<eventObject> favorites = new ArrayList<eventObject>();
 
+    public ArrayList<eventObject> eventArray = new ArrayList<eventObject>();
+
     public SharedPreferences prefs;
 
     private Gson gson = new Gson();
@@ -254,6 +256,11 @@ public class MainActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    public void updateEvents(ArrayList<eventObject> eventArray)
+    {
+        this.eventArray = eventArray;
+    }
+
     public void getJSONArray(String url) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -357,11 +364,41 @@ public class MainActivity extends AppCompatActivity {
         favoriteTab.refreshAdd(position);
     }
 
+    public void addFavorite(int position)
+    {
+        addFavorite(eventArray.get(position), position);
+    }
+
     public void removeFavorite(int i)
     {
         favorites.remove(i);
         saveFavorites();
         favoriteTab.refreshDelete(i);
+    }
+
+    public void removeFavorite(String id)
+    {
+        for (int i = 0; i < favorites.size(); ++i)
+        {
+            if (favorites.get(i).id.equals(id))
+            {
+                removeFavorite(i);
+                return;
+            }
+        }
+    }
+
+    public boolean isFavorited(String id)
+    {
+        for (int i = 0; i < favorites.size(); ++i)
+        {
+            if (favorites.get(i).id.equals(id))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
