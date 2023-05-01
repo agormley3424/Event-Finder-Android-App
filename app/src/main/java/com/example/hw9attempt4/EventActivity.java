@@ -139,16 +139,6 @@ public class EventActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.action_bar_icons, menu);
 
-//        View twitterButton = findViewById(R.id.twitterIcon);
-//        View facebookButton = findViewById(R.id.facebookIcon);
-//
-//        twitterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com"));
-//                startActivity(browserIntent);
-//            }
-//        });
         View v = findViewById(R.id.twitterIcon);
 
 
@@ -159,21 +149,29 @@ public class EventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.twitterIcon)
         {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com"));
+            String eventName = null;
+            String eventURL = null;
+            try {
+                eventName = eventJSON.getString("name");
+                eventURL = eventJSON.getString("url");
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                    "https://twitter.com/intent/tweet?text=Check%20" + eventName + "%20on%20Ticketmaster," + eventURL));
             startActivity(browserIntent);
         } else if (item.getItemId() == R.id.facebookIcon) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
+            String eventURL = null;
+            try {
+                eventURL = eventJSON.getString("url");
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/sharer/sharer.php?u=" + eventURL + "&amp;src=sdkpreparse"));
             startActivity(browserIntent);
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        View v = findViewById(R.id.twitterIcon);
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
 
