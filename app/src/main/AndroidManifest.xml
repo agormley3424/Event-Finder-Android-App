@@ -22,6 +22,7 @@
             android:name=".EventActivity"
             android:exported="false"
             android:label="@string/title_activity_event_details"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.HW9Attempt4.NoActionBar" />
         <activity
             android:name=".MainActivity"
