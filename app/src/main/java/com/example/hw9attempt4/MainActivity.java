@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
-        stringDest += "keyword=" + ((TextView) findViewById(R.id.keywordInput)).getText();
+        stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
         stringDest += "&category=" + catString.toLowerCase();

@@ -262,8 +262,8 @@ public class artistTab extends Fragment {
     {
         try {
             newArtist.album1 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(0).getString("url");
-            newArtist.album2 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(1).getString("url");
-            newArtist.album3 = response.getJSONArray("items").getJSONObject(0).getJSONArray("images").getJSONObject(2).getString("url");
+            newArtist.album2 = response.getJSONArray("items").getJSONObject(1).getJSONArray("images").getJSONObject(0).getString("url");
+            newArtist.album3 = response.getJSONArray("items").getJSONObject(2).getJSONArray("images").getJSONObject(0).getString("url");
 
             artistArray.add(newArtist);
 
