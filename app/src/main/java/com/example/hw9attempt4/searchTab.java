@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,6 +74,22 @@ public class searchTab extends Fragment {
         Button searchButton =  view.findViewById(R.id.searchButton);
         Button clearButton =  view.findViewById(R.id.clearButton);
         EditText keywordInput =  view.findViewById(R.id.keywordInput);
+
+        Switch autoDetect = view.findViewById(R.id.autoDetect);
+
+        autoDetect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView locationInput = (TextView) view.findViewById(R.id.locationInput);
+
+                if (locationInput.getVisibility() == View.GONE){
+                    locationInput.setVisibility(View.VISIBLE);
+                } else
+                {
+                    locationInput.setVisibility(View.GONE);
+                }
+            }
+        });
 
 //        searchButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
