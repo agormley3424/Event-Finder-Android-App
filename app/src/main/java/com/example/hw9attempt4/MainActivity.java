@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Gson gson = new Gson();
 
+    private favoriteTab favoriteTab;
+
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
@@ -116,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 
         loadFavorites();
-        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
-                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
-        saveFavorites();
+//        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
+//                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
+//        saveFavorites();
         //clearFavorites();
     }
 
@@ -129,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
 //        Fragment favoriteTab = new favoriteTab();
 
         adapter.addFragment(new SearchParentFragment(), getString(R.string.searchText));
-        adapter.addFragment(new favoriteTab(), getString(R.string.favoriteText));
+
+        favoriteTab = new favoriteTab();
+        adapter.addFragment(favoriteTab, getString(R.string.favoriteText));
         //adapter.addFragment(new detailTab(), "Details");
         viewPager.setAdapter(adapter);
     }
@@ -333,6 +337,7 @@ public class MainActivity extends AppCompatActivity {
         favorites = new ArrayList<eventObject>();
 
         saveFavorites();
+        favoriteTab.refreshFavorites();
 
         int i = 1;
     }
@@ -340,11 +345,15 @@ public class MainActivity extends AppCompatActivity {
     public void addFavorite(eventObject event)
     {
         favorites.add(event);
+        saveFavorites();
+        favoriteTab.refreshFavorites();
     }
 
     public void removeFavorite(int i)
     {
         favorites.remove(i);
+        saveFavorites();
+        favoriteTab.refreshFavorites();
     }
 
 

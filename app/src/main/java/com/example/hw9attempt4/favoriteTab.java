@@ -35,6 +35,8 @@ public class favoriteTab extends Fragment {
 
     private List<eventObject> favorites;
 
+    FavoriteRecycler adapter;
+
     public favoriteTab() {
         // Required empty public constructor
     }
@@ -100,7 +102,7 @@ public class favoriteTab extends Fragment {
 
         RecyclerView eventList = view.findViewById(R.id.favoriteList);
 
-        FavoriteRecycler adapter = new FavoriteRecycler(this.getContext(), favorites);
+        adapter = new FavoriteRecycler(this.getContext(), favorites);
 
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -120,7 +122,12 @@ public class favoriteTab extends Fragment {
         return view;
     }
 
-//    public void removeFavorite(int index)
+    public void refreshFavorites()
+    {
+        adapter.notifyItemRemoved(2);
+    }
+
+    //    public void removeFavorite(int index)
 //    {
 //        favorites.remove(index);
 //    }

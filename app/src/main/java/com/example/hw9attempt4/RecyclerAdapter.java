@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         View view = inflater.inflate(R.layout.fragment_single_result, parent, false);
 
 
-        return new RecyclerAdapter.MyViewHolder(view);
+        return new RecyclerAdapter.MyViewHolder(view, events);
     }
 
     @Override
@@ -67,8 +67,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         Button unfavorite;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,ArrayList<eventObject> paramEvents) {
             super(itemView);
+
+            ArrayList<eventObject> events = paramEvents;
 
             eventImage = itemView.findViewById(R.id.eventImage);
             eventName = itemView.findViewById(R.id.eventName);
@@ -89,6 +91,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 public void onClick(View v) {
                     MainActivity activity = (MainActivity) itemView.getContext();
                     activity.viewDetails(position);
+                }
+            });
+
+            // Store this object as a new favorite
+            unfavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity activity = (MainActivity) itemView.getContext();
+                    activity.addFavorite(events.get(position));
                 }
             });
 
