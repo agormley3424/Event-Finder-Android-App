@@ -2,6 +2,7 @@ package com.example.hw9attempt4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -55,5 +56,12 @@ public class EventActivity extends AppCompatActivity {
         }
 
         int x = 1;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.action_bar_icons, menu);
+        return true;
     }
 }
