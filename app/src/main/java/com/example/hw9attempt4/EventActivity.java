@@ -22,10 +22,13 @@ public class EventActivity extends AppCompatActivity {
 
     public JSONObject eventJSON;
 
+    private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        actionBar = getSupportActionBar();
 
         // set up the view pager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -34,8 +37,9 @@ public class EventActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -55,6 +59,12 @@ public class EventActivity extends AppCompatActivity {
         try {
             eventJSON = new JSONObject(i.getExtras().getString("JSON"));
             eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(position);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            actionBar.setTitle(eventJSON.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
