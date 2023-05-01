@@ -130,16 +130,22 @@ public class EventActivity extends AppCompatActivity {
         //View v = findViewById(R.id.twitterIcon);
 
 
-
         int x = 1;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.action_bar_icons, menu);
 
-        View v = findViewById(R.id.twitterIcon);
+        MenuItem favoriteButton = menu.findItem(R.id.favoriteButton);
+
+        favoriteButton.setIcon(R.drawable.heart_filled);
+
+        View v = findViewById(R.id.favoriteButton);
+
+        int i = 1;
 
 
         return true;
