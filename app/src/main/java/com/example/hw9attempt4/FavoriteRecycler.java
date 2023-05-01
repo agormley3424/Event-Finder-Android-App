@@ -18,11 +18,11 @@ import java.util.List;
 
 
 // Class created in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyViewHolder>{
     Context context;
-    ArrayList<eventObject> events;
+    List<eventObject> events;
 
-    public RecyclerAdapter(Context context, ArrayList<eventObject> events)
+    public FavoriteRecycler(Context context, List<eventObject> events)
     {
         this.context = context;
         this.events = events;
@@ -30,16 +30,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @NonNull
     @Override
-    public RecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavoriteRecycler.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.fragment_single_result, parent, false);
+        View view = inflater.inflate(R.layout.fragment_single_favorite, parent, false);
 
 
-        return new RecyclerAdapter.MyViewHolder(view);
+        return new FavoriteRecycler.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoriteRecycler.MyViewHolder holder, int position) {
+        //holder.eventName.setText(events.get(position).get("eventName"));
         holder.eventName.setText(events.get(position).eventName);
         holder.eventDate.setText(events.get(position).date);
         holder.eventTime.setText(events.get(position).time);

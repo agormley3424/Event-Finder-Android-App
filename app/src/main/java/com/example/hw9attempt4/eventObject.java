@@ -18,4 +18,24 @@ public class eventObject {
         this.date = date;
         this.time = time;
     }
+
+    public String get(String query)
+    {
+        switch (query) {
+            case "imageURL":
+                return imageURL;
+            case "eventName":
+                return eventName;
+            case "venue":
+                return venue;
+            case "category":
+                return category;
+            case "date":
+                return date;
+            case "time":
+                return time;
+            default:
+                return "Invalid field requested";
+        }
+    }
 }

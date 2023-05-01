@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import androidx.core.splashscreen.SplashScreen;
 
@@ -38,6 +39,7 @@ import org.json.JSONObject;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -302,13 +304,21 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
-    public void loadFavorites()
+    public void loadFavorites ()
     {
         /* Sourced from https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android */
 
         String jsonFavorites = prefs.getString("favoritesList", "[]");
 
-        favorites = (gson.fromJson(jsonFavorites, List.class));
+        TypeToken<ArrayList<eventObject>> favoriteType = new TypeToken<ArrayList<eventObject>>() {};
+
+        favorites = (gson.fromJson(jsonFavorites, favoriteType.getType()));
+
+//        for (int i = 0; i < favorites.size(); ++i)
+//        {
+//            eventObject obj = gson.fromJson(favorites.get(i), eventObject.class);
+//            favorites.set(i)
+//        }
         //eventObject[] simpleFavorites = (gson.fromJson(jsonFavorites, eventObject[].class));
         //This line, 309, is bugging out. Need to figure out how to cast this correctly
         //List favoriteList = Arrays.asList(simpleFavorites);
