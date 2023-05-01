@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.Spinner;
@@ -12,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -123,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
 //                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
 //        saveFavorites();
         //clearFavorites();
+
+        getApplicationContext();
+        int x = 1;
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -147,8 +152,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    public void viewSearchResults()
-    {
+    public void viewSearchResults() {
         adapter.replaceFragment(0, new SearchResults());
     }
 
@@ -170,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             }
+
             Location userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (userLocation == null)
             {
