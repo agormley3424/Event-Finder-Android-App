@@ -65,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         TextView eventTime;
         TextView eventCategory;
 
-        Button unfavorite;
+        Button favorite;
 
         public MyViewHolder(@NonNull View itemView,ArrayList<eventObject> paramEvents) {
             super(itemView);
@@ -78,7 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             eventDate = itemView.findViewById(R.id.eventDate);
             eventTime = itemView.findViewById(R.id.eventTime);
             eventCategory = itemView.findViewById(R.id.eventCategory);
-            unfavorite = itemView.findViewById(R.id.unfavoriteButton);
+            favorite = itemView.findViewById(R.id.favoriteButton);
 
             eventCategory.setSelected(true);
             eventName.setSelected(true);
@@ -95,11 +95,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             });
 
             // Store this object as a new favorite
-            unfavorite.setOnClickListener(new View.OnClickListener() {
+            favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MainActivity activity = (MainActivity) itemView.getContext();
-                    activity.addFavorite(events.get(position));
+                    activity.addFavorite(events.get(position), position);
                 }
             });
 

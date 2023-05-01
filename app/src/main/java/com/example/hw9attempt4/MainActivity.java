@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 
         loadFavorites();
+        int i = 1;
 //        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
 //                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
 //        saveFavorites();
@@ -337,23 +338,24 @@ public class MainActivity extends AppCompatActivity {
         favorites = new ArrayList<eventObject>();
 
         saveFavorites();
-        favoriteTab.refreshFavorites();
+
+        // Not sure how to refresh adapter for this
 
         int i = 1;
     }
 
-    public void addFavorite(eventObject event)
+    public void addFavorite(eventObject event, int position)
     {
         favorites.add(event);
         saveFavorites();
-        favoriteTab.refreshFavorites();
+        favoriteTab.refreshAdd(position);
     }
 
     public void removeFavorite(int i)
     {
         favorites.remove(i);
         saveFavorites();
-        favoriteTab.refreshFavorites();
+        favoriteTab.refreshDelete(i);
     }
 
 

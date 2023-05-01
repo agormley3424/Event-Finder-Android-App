@@ -93,6 +93,14 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
                 }
             });
 
+            unfavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity activity = (MainActivity) itemView.getContext();
+                    activity.removeFavorite(position);
+                }
+            });
+
 
         }
     }

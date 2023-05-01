@@ -107,6 +107,9 @@ public class favoriteTab extends Fragment {
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+//        activity.clearFavorites();
+//        refreshFavorites();
+
 
 
 
@@ -122,9 +125,19 @@ public class favoriteTab extends Fragment {
         return view;
     }
 
-    public void refreshFavorites()
+    public void refreshAdd(int position)
     {
-        adapter.notifyItemRemoved(2);
+        adapter.notifyItemInserted(position);
+    }
+
+    public void refreshDelete(int position)
+    {
+        adapter.notifyItemRemoved(position);
+
+        for (int i = position; i < adapter.getItemCount(); ++i)
+        {
+            adapter.notifyItemChanged(i);
+        }
     }
 
     //    public void removeFavorite(int index)
