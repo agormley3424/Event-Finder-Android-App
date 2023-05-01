@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 userLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
             }
 
-            stringDest += "&location=" + userLocation.getLongitude() + "," + userLocation.getLatitude();
+            stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
 
             stringDest += "&locationSearch=false";
         } else {
