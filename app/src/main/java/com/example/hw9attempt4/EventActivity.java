@@ -33,6 +33,8 @@ public class EventActivity extends AppCompatActivity {
 
     private ActionBar actionBar;
 
+    public boolean isFavorited;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class EventActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         int position = i.getExtras().getInt("position");
+        isFavorited = i.getExtras().getBoolean("isFavorited");
 
         eventJSON = null;
 
@@ -141,9 +144,18 @@ public class EventActivity extends AppCompatActivity {
 
         MenuItem favoriteButton = menu.findItem(R.id.favoriteButton);
 
-        //favoriteButton.setIcon(R.drawable.heart_filled);
 
-        View v = findViewById(R.id.favoriteButton);
+
+        if (isFavorited)
+        {
+            favoriteButton.setIcon(R.drawable.heart_filled);
+        }
+        else
+        {
+            favoriteButton.setIcon(R.drawable.heart_outline);
+        }
+
+        //View v = findViewById(R.id.favoriteButton);
 
         int i = 1;
 
@@ -175,6 +187,14 @@ public class EventActivity extends AppCompatActivity {
             }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/sharer/sharer.php?u=" + eventURL + "&amp;src=sdkpreparse"));
             startActivity(browserIntent);
+        }
+        else if (item.getItemId() == R.id.favoriteButton)
+        {
+            isFavorited = !isFavorited;
+
+            int id = isFavorited ? R.drawable.heart_filled : R.drawable.heart_outline;
+
+            item.setIcon(id);
         }
 
         return super.onOptionsItemSelected(item);

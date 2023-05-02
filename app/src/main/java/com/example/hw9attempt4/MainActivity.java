@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         Intent switchActivityIntent = new Intent(this, EventActivity.class);
         switchActivityIntent.putExtra("position", position);
         switchActivityIntent.putExtra("JSON", searchJSON.toString());
+        switchActivityIntent.putExtra("isFavorited", isFavorited(eventArray.get(position).id));
         startActivity(switchActivityIntent);
     }
 
