@@ -187,7 +187,7 @@ public class SearchResults extends Fragment {
         return view;
     }
 
-    public void refreshUnfavorite(int position)
+    public void refreshResults(int position)
     {
         adapter.notifyItemChanged(position);
     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -155,7 +156,39 @@ public class MainActivity extends AppCompatActivity {
         switchActivityIntent.putExtra("position", position);
         switchActivityIntent.putExtra("JSON", searchJSON.toString());
         switchActivityIntent.putExtra("isFavorited", isFavorited(eventArray.get(position).id));
-        startActivity(switchActivityIntent);
+        startActivityForResult(switchActivityIntent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+                boolean isFavoritedDetail = data.getBooleanExtra("isFavorited", false);
+                int detailPos = data.getIntExtra("position", -1);
+                boolean isFavoritedHere = isFavorited(eventArray.get(detailPos).id);
+
+                // Do nothing
+                if (isFavoritedDetail == isFavoritedHere)
+                {
+                    return;
+                }
+                // Add to favorites
+                else if (isFavoritedDetail)
+                {
+                    addFavorite(detailPos);
+                }
+                // Remove from favorites
+                else // if (!isFavoritedDetail)
+                {
+                    removeFavorite(eventArray.get(detailPos).id);
+                }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     public void viewSearchResults() {
@@ -371,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
     public void addFavorite(int position)
     {
         addFavorite(eventArray.get(position));
+        searchResults.refreshResults(position);
     }
 
     public void removeFavorite(int i)
@@ -381,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
         saveFavorites();
         favoriteTab.refreshDelete(i);
 
-        searchResults.refreshUnfavorite(eventPosition);
+        searchResults.refreshResults(eventPosition);
     }
 
     public void removeFavorite(String id)

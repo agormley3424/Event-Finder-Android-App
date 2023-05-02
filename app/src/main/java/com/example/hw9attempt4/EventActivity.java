@@ -35,6 +35,8 @@ public class EventActivity extends AppCompatActivity {
 
     public boolean isFavorited;
 
+    private int myPos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,14 +69,14 @@ public class EventActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         Intent i = getIntent();
-        int position = i.getExtras().getInt("position");
+        myPos = i.getExtras().getInt("position");
         isFavorited = i.getExtras().getBoolean("isFavorited");
 
         eventJSON = null;
 
         try {
             eventJSON = new JSONObject(i.getExtras().getString("JSON"));
-            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(position);
+            eventJSON = eventJSON.getJSONObject("_embedded").getJSONArray("events").getJSONObject(myPos);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -195,12 +197,34 @@ public class EventActivity extends AppCompatActivity {
             int id = isFavorited ? R.drawable.heart_filled : R.drawable.heart_outline;
 
             item.setIcon(id);
+
+            Intent sendBack = new Intent();
+            sendBack.putExtra("isFavorited", isFavorited);
+            sendBack.putExtra("position", myPos);
+            setResult(RESULT_OK, sendBack);
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//        finish();
+//    }
 
+    //    @Override
+//    protected void onStop() {
+//        super.onStop();
+//
+//        Intent sendBack = new Intent();
+//        sendBack.putExtra("isFavorited", isFavorited);
+//        sendBack.putExtra("position", myPos);
+//        setResult(RESULT_OK, sendBack);
+//        finish();
+//    }
 
     //    void clickTwitter(View v)
 //    {
