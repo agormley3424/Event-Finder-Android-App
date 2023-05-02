@@ -146,6 +146,20 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
 
 
         TextView venueHours = view.findViewById(R.id.venueHours);
+
+        venueHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (venueHours.getMaxLines() == 3)
+                {
+                    venueHours.setMaxLines(Integer.MAX_VALUE);
+                } else
+                {
+                    venueHours.setMaxLines(3);
+                }
+            }
+        });
+
         venueHours.setSelected(true);
 
         try {
@@ -158,6 +172,19 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
         TextView venueGeneralRules = view.findViewById(R.id.venueGeneralRules);
         venueGeneralRules.setSelected(true);
 
+        venueGeneralRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (venueGeneralRules.getMaxLines() == 3)
+                {
+                    venueGeneralRules.setMaxLines(Integer.MAX_VALUE);
+                } else
+                {
+                    venueGeneralRules.setMaxLines(3);
+                }
+            }
+        });
+
         try {
             venueGeneralRules.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("generalInfo").getString("generalRule"));
         } catch (JSONException e) {
@@ -167,6 +194,19 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
 
         TextView venueChildRules = view.findViewById(R.id.venueChildRules);
         venueChildRules.setSelected(true);
+
+        venueChildRules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (venueChildRules.getMaxLines() == 3)
+                {
+                    venueChildRules.setMaxLines(Integer.MAX_VALUE);
+                } else
+                {
+                    venueChildRules.setMaxLines(3);
+                }
+            }
+        });
 
         try {
             venueChildRules.setText(eventJSON.getJSONObject("_embedded").getJSONArray("venues").getJSONObject(0).getJSONObject("generalInfo").getString("childRule"));
@@ -213,6 +253,7 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
                 googleMap.addMarker(pin);
             }
         });
+
         // Inflate the layout for this fragment
         return view;
     }

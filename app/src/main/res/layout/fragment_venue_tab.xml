@@ -74,6 +74,8 @@
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="normal"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -86,6 +88,8 @@
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="normal"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     app:layout_constraintStart_toStartOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -95,10 +99,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
+                    android:maxLines="3"
                     android:text="Child rules here"
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="normal"
+                    android:ellipsize="end"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
