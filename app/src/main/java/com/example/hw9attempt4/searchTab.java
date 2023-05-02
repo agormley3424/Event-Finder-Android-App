@@ -55,6 +55,10 @@ public class searchTab extends Fragment {
 
     private List<String> autoCompleteStrings = new ArrayList<String>();
 
+    private ArrayAdapter<String> stringAdapter;
+
+    //private String[] testStrings = {"hello, hecko, hemlo"};
+
     public searchTab() {
         // Required empty public constructor
     }
@@ -95,6 +99,7 @@ public class searchTab extends Fragment {
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        autoCompleteStrings.clear();
                         try {
                             JSONArray attractions = response.getJSONObject("_embedded").getJSONArray("attractions");
                             for (int i = 0; i < attractions.length(); ++i)
@@ -102,8 +107,9 @@ public class searchTab extends Fragment {
                                 String artistName = attractions.getJSONObject(i).getString("name");
                                 autoCompleteStrings.add(artistName);
                             }
+                            resetStringAdapter();
                         } catch (JSONException e) {
-                            throw new RuntimeException(e);
+
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -127,6 +133,11 @@ public class searchTab extends Fragment {
 
         Switch autoDetect = view.findViewById(R.id.autoDetect);
 
+        stringAdapter = new ArrayAdapter<String>(this.getContext(),
+                android.R.layout.simple_list_item_1, autoCompleteStrings);
+
+        keywordInput.setAdapter(stringAdapter);
+
         autoDetect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,11 +160,6 @@ public class searchTab extends Fragment {
                 String ticketMaster = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=ZUe4QATYrGXNGmv3VGkGdAz0gC3XXeVo&keyword=" + keywordInput.getText();
 
                 getSuggestions(ticketMaster);
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_list_item_1);
-
-                keywordInput.setAdapter(adapter);
             }
 
             public void beforeTextChanged(CharSequence s, int start,
@@ -183,8 +189,6 @@ public class searchTab extends Fragment {
             }
         });
 
-
-
 //        clearButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -193,6 +197,15 @@ public class searchTab extends Fragment {
 //            }
 //        });
         return view;
+    }
+
+    public void resetStringAdapter()
+    {
+        AutoCompleteTextView keywordInput =  this.getView().findViewById(R.id.keywordInput);
+        stringAdapter = new ArrayAdapter<String>(this.getContext(),
+                android.R.layout.simple_list_item_1, autoCompleteStrings);
+
+        keywordInput.setAdapter(stringAdapter);
     }
 
 
