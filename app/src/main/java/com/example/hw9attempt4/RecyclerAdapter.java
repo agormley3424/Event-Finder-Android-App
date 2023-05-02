@@ -62,6 +62,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             {
                 favorite.setImageResource(R.drawable.heart_outline);
             }
+
+
+        // Store this object as a new favorite
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isFavorited = activity.isFavorited(holder.id);
+                if (isFavorited)
+                {
+                    favorite.setImageResource(R.drawable.heart_outline);
+                    activity.removeFavorite(holder.id);
+
+                    int i = 1;
+                }
+                else
+                {
+                    favorite.setImageResource(R.drawable.heart_filled);
+                    activity.addFavorite(holder.getAdapterPosition());
+
+                    int i = holder.getAdapterPosition();
+                }
+            }
+        });
     }
 
     @Override
@@ -103,34 +126,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     activity.viewDetails(position);
-                }
-            });
-
-            // Store this object as a new favorite
-            favorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ArrayList<eventObject> events = paramEvents;
-                    MainActivity activity = (MainActivity) itemView.getContext();
-                    activity.addFavorite(events.get(position), position);
-                }
-            });
-
-            // Store this object as a new favorite
-            favorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isFavorited = activity.isFavorited(id);
-                    if (isFavorited)
-                    {
-                        favorite.setImageResource(R.drawable.heart_outline);
-                        activity.removeFavorite(id);
-                    }
-                    else
-                    {
-                        favorite.setImageResource(R.drawable.heart_filled);
-                        activity.addFavorite(position);
-                    }
                 }
             });
 

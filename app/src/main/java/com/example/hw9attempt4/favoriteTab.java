@@ -93,6 +93,7 @@ public class favoriteTab extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite_tab, container, false);
         MainActivity activity = (MainActivity) getActivity();
         favorites = activity.favorites;
+        ArrayList<eventObject> mainEvents = activity.eventArray;
 
 
 

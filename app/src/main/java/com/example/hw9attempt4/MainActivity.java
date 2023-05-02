@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 //        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
 //                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
 //        saveFavorites();
-        //clearFavorites();
+        clearFavorites();
 
         getApplicationContext();
         int x = 1;
@@ -357,16 +357,16 @@ public class MainActivity extends AppCompatActivity {
         int i = 1;
     }
 
-    public void addFavorite(eventObject event, int position)
+    public void addFavorite(eventObject event)
     {
         favorites.add(event);
         saveFavorites();
-        favoriteTab.refreshAdd(position);
+        favoriteTab.refreshAdd(favorites.size());
     }
 
     public void addFavorite(int position)
     {
-        addFavorite(eventArray.get(position), position);
+        addFavorite(eventArray.get(position));
     }
 
     public void removeFavorite(int i)

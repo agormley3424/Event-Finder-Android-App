@@ -10,8 +10,10 @@ public class eventObject {
 
     public String id;
 
+    public int pos;
+
     public eventObject(String imageURL, String eventName, String venue,
-                       String category, String date, String time, String id)
+                       String category, String date, String time, String id, int pos)
     {
         this.imageURL = imageURL;
         this.eventName = eventName;
@@ -20,6 +22,7 @@ public class eventObject {
         this.date = date;
         this.time = time;
         this.id = id;
+        this.pos = pos;
     }
 
     public String get(String query)

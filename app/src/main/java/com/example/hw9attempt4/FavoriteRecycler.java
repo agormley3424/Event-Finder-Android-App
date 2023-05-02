@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,10 @@ import java.util.List;
 // Class created in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
 public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyViewHolder>{
     Context context;
+
+    // A list of all the favorite events in favorited order
     List<eventObject> events;
+
 
     public FavoriteRecycler(Context context, List<eventObject> events)
     {
@@ -32,7 +36,7 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
     @Override
     public FavoriteRecycler.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.fragment_single_favorite, parent, false);
+        View view = inflater.inflate(R.layout.fragment_single_result, parent, false);
 
 
         return new FavoriteRecycler.MyViewHolder(view);
@@ -40,15 +44,32 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteRecycler.MyViewHolder holder, int position) {
-        //holder.eventName.setText(events.get(position).get("eventName"));
-        holder.eventName.setText(events.get(position).eventName);
-        holder.eventDate.setText(events.get(position).date);
-        holder.eventTime.setText(events.get(position).time);
-        holder.eventVenue.setText(events.get(position).venue);
-        holder.eventCategory.setText(events.get(position).category);
-        Picasso.get().load(events.get(position).imageURL).into(holder.eventImage);
+        MainActivity activity = (MainActivity) holder.itemView.getContext();
+
+        List<eventObject> mainEvents = activity.eventArray;
+        int myPos = events.get(position).pos;
+
+        //holder.eventName.setText(events.get(myPos).get("eventName"));
+        holder.eventName.setText(mainEvents.get(myPos).eventName);
+        holder.eventDate.setText(mainEvents.get(myPos).date);
+        holder.eventTime.setText(mainEvents.get(myPos).time);
+        holder.eventVenue.setText(mainEvents.get(myPos).venue);
+        holder.eventCategory.setText(mainEvents.get(myPos).category);
+        Picasso.get().load(mainEvents.get(myPos).imageURL).into(holder.eventImage);
         holder.position = holder.getAdapterPosition();
-        holder.imageURL = events.get(position).imageURL;
+        holder.imageURL = mainEvents.get(myPos).imageURL;
+
+        ImageButton unfavorite = holder.unfavorite;
+
+        unfavorite.setImageResource(R.drawable.heart_filled);
+
+        unfavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                unfavorite.setImageResource(R.drawable.heart_outline);
+                activity.removeFavorite(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -66,7 +87,7 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
         TextView eventTime;
         TextView eventCategory;
 
-        Button unfavorite;
+        ImageButton unfavorite;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,12 +98,11 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
             eventDate = itemView.findViewById(R.id.eventDate);
             eventTime = itemView.findViewById(R.id.eventTime);
             eventCategory = itemView.findViewById(R.id.eventCategory);
-            unfavorite = itemView.findViewById(R.id.unfavoriteButton);
+            unfavorite = itemView.findViewById(R.id.favoriteButton);
 
             eventCategory.setSelected(true);
             eventName.setSelected(true);
             eventVenue.setSelected(true);
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -92,16 +112,6 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
                     activity.viewDetails(position);
                 }
             });
-
-            unfavorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity activity = (MainActivity) itemView.getContext();
-                    activity.removeFavorite(position);
-                }
-            });
-
-
         }
     }
 }

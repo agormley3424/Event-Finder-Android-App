@@ -105,7 +105,7 @@ public class SearchResults extends Fragment {
                 e.printStackTrace();
             }
 
-            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time, id));
+            eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time, id, i));
         }
 
 //        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
