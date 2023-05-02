@@ -24,10 +24,34 @@
 
     <Button
         android:id="@+id/backButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:layout_marginHorizontal="0dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="Back to Search"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:iconGravity="start"
+        app:iconTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/noResults"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="@color/darkGrey"
+        android:backgroundTint="@color/darkGrey"
+        android:gravity="center"
+        android:text="No events found"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/resultList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/resultList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

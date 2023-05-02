@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -182,6 +183,17 @@ public class SearchResults extends Fragment {
                 activity.showSearchBox();
             }
         });
+
+        TextView emptyText = view.findViewById(R.id.noResults);
+
+        if (eventArray.size() == 0)
+        {
+            emptyText.setVisibility(TextView.VISIBLE);
+        }
+        else
+        {
+            emptyText.setVisibility(TextView.GONE);
+        }
 
         // Inflate the layout for this fragment
         return view;
