@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,17 @@ public class favoriteTab extends Fragment {
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        TextView emptyText = view.findViewById(R.id.favoriteText);
+
+        if (favorites.size() == 0)
+        {
+            emptyText.setVisibility(TextView.VISIBLE);
+        }
+        else
+        {
+            emptyText.setVisibility(TextView.GONE);
+        }
+
 //        activity.clearFavorites();
 //        refreshFavorites();
 
@@ -129,6 +141,8 @@ public class favoriteTab extends Fragment {
     public void refreshAdd(int position)
     {
         adapter.notifyItemInserted(position);
+        TextView emptyText = getView().findViewById(R.id.favoriteText);
+        emptyText.setVisibility(TextView.GONE);
     }
 
     public void refreshDelete(int position)
@@ -138,6 +152,12 @@ public class favoriteTab extends Fragment {
         for (int i = position; i < adapter.getItemCount(); ++i)
         {
             adapter.notifyItemChanged(i);
+        }
+
+        if (favorites.size() == 0)
+        {
+            TextView emptyText = getView().findViewById(R.id.favoriteText);
+            emptyText.setVisibility(TextView.VISIBLE);
         }
     }
 
