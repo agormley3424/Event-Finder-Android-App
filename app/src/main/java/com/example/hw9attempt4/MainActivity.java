@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     private favoriteTab favoriteTab;
 
+    private SearchResults searchResults;
+
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
@@ -156,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewSearchResults() {
-        adapter.replaceFragment(0, new SearchResults());
+        searchResults = new SearchResults();
+        adapter.replaceFragment(0, searchResults);
     }
 
     // Replaces the search fragment with the results fragment
@@ -371,9 +374,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void removeFavorite(int i)
     {
+        int eventPosition = favorites.get(i).pos;
+
         favorites.remove(i);
         saveFavorites();
         favoriteTab.refreshDelete(i);
+
+        searchResults.refreshUnfavorite(eventPosition);
     }
 
     public void removeFavorite(String id)

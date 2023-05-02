@@ -37,6 +37,8 @@ public class SearchResults extends Fragment {
 
     private MainActivity activity;
 
+    private RecyclerAdapter adapter;
+
     public SearchResults() {
         // Required empty public constructor
     }
@@ -168,7 +170,7 @@ public class SearchResults extends Fragment {
 
         activity.updateEvents(this.eventArray);
 
-        RecyclerAdapter adapter = new RecyclerAdapter(this.getContext(), eventArray);
+        adapter = new RecyclerAdapter(this.getContext(), eventArray);
 
         eventList.setAdapter(adapter);
         eventList.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -183,5 +185,10 @@ public class SearchResults extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void refreshUnfavorite(int position)
+    {
+        adapter.notifyItemChanged(position);
     }
 }
