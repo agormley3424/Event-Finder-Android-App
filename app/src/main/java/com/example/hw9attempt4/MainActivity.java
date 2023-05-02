@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SearchResults searchResults;
 
+    private searchTab searchTabVar;
+
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
@@ -131,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
 //                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
 //        saveFavorites();
         clearFavorites();
+
+        searchTabVar = new searchTab();
 
         getApplicationContext();
         int x = 1;
@@ -199,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
     // Replaces the search fragment with the results fragment
     public void showSearchResults() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        AutoCompleteTextView keywordInput = findViewById(R.id.keywordInput);
+        String input = keywordInput.getText().toString();
 
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
@@ -321,7 +329,10 @@ public class MainActivity extends AppCompatActivity {
 
     // Replaces the search results fragment with the search box fragment
     public void showSearchBox() {
-        adapter.replaceFragment(0, new searchTab());
+        adapter.replaceFragment(0, searchTabVar);
+//        adapter.removeFragment(searchTabVar);
+//        adapter.saveState();
+//        adapter.destroyItem();
     }
 
     //get access to location permission
