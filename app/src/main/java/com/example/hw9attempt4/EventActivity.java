@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -80,7 +81,9 @@ public class EventActivity extends AppCompatActivity {
         }
 
         try {
-            actionBar.setTitle(eventJSON.getString("name"));
+            //actionBar.setTitle(eventJSON.getString("name"));
+            String title = eventJSON.getString("name");
+            getSupportActionBar().setTitle(Html.fromHtml("<font color='#50C31B'>" + title + "EventFinder</font>"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

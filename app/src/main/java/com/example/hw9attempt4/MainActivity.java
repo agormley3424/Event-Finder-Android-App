@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
@@ -139,6 +141,12 @@ public class MainActivity extends AppCompatActivity {
 
         getApplicationContext();
         int x = 1;
+
+//        TextView title = (TextView) getSupportActionBar().getTitle();
+//        int col = getResources().getColor(R.color.green);
+//        title.setTextColor(col);
+
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#50C31B'>EventFinder</font>"));
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'

@@ -32,6 +32,7 @@
             android:backgroundTint="@color/green"
             android:ems="10"
             android:inputType="textPersonName"
+            android:popupBackground="@color/black"
             android:text="Football"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
