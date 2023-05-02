@@ -1,4 +1,5 @@
 package com.example.hw9attempt4;
+
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
@@ -51,12 +52,9 @@ public class EventActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
 
-
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-
-
-
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
