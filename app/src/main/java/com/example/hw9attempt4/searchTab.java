@@ -1,21 +1,41 @@
 package com.example.hw9attempt4;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 //import android.support.v4.app.Fragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +52,8 @@ public class searchTab extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private List<String> autoCompleteStrings = new ArrayList<String>();
 
     public searchTab() {
         // Required empty public constructor
@@ -66,6 +88,34 @@ public class searchTab extends Fragment {
 
     }
 
+    public void getSuggestions(String url)
+    {
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray attractions = response.getJSONObject("_embedded").getJSONArray("attractions");
+                            for (int i = 0; i < attractions.length(); ++i)
+                            {
+                                String artistName = attractions.getJSONObject(i).getString("name");
+                                autoCompleteStrings.add(artistName);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                    }
+                });
+
+        queue.add(jsonObjectRequest);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +123,7 @@ public class searchTab extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_tab, container, false);
         Button searchButton =  view.findViewById(R.id.searchButton);
         Button clearButton =  view.findViewById(R.id.clearButton);
-        EditText keywordInput =  view.findViewById(R.id.keywordInput);
+        AutoCompleteTextView keywordInput =  view.findViewById(R.id.keywordInput);
 
         Switch autoDetect = view.findViewById(R.id.autoDetect);
 
@@ -88,6 +138,30 @@ public class searchTab extends Fragment {
                 {
                     locationInput.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        Context context = getContext();
+
+        keywordInput.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                String ticketMaster = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=ZUe4QATYrGXNGmv3VGkGdAz0gC3XXeVo&keyword=" + keywordInput.getText();
+
+                getSuggestions(ticketMaster);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_list_item_1);
+
+                keywordInput.setAdapter(adapter);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
             }
         });
 
@@ -109,6 +183,8 @@ public class searchTab extends Fragment {
             }
         });
 
+
+
 //        clearButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -118,4 +194,6 @@ public class searchTab extends Fragment {
 //        });
         return view;
     }
+
+
 }
