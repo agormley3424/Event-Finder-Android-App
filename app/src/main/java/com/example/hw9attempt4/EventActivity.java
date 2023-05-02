@@ -2,6 +2,7 @@ package com.example.hw9attempt4;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +58,48 @@ public class EventActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 //        actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
+
+        TabLayout.Tab detailTab = tabLayout.getTabAt(0);
+        TabLayout.Tab artistTab = tabLayout.getTabAt(1);
+        TabLayout.Tab venueTab = tabLayout.getTabAt(2);
+
+        int greenColor = ContextCompat.getColor(getApplicationContext(), R.color.green);
+        int whiteColor = ContextCompat.getColor(getApplicationContext(), R.color.white);
+
+        detailTab.setIcon(R.drawable.info_icon);
+        detailTab.getIcon().setColorFilter(greenColor, PorterDuff.Mode.SRC_IN);
+        artistTab.setIcon(R.drawable.artist_icon);
+        artistTab.getIcon().setColorFilter(whiteColor, PorterDuff.Mode.SRC_IN);
+        venueTab.setIcon(R.drawable.venue_icon);
+        venueTab.getIcon().setColorFilter(whiteColor, PorterDuff.Mode.SRC_IN);
+
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.green);
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.white);
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        super.onTabReselected(tab);
+                        int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.green);
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+        );
+
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
