@@ -44,7 +44,12 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
         //FM.beginTransaction().remove(mFragmentList.get(i)).commit();
 
 
-        final FragmentTransaction ft = mFragmentManager.beginTransaction();
+        Fragment searchParent = mFragmentManager.getFragments().get(0);
+
+        FragmentManager childManager = searchParent.getChildFragmentManager();
+
+
+        final FragmentTransaction ft = childManager.beginTransaction();
 
         ft.replace(R.id.fragment_container_view, newFragment, null);
         ft.commit();

@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if (requestCode == 1 && resultCode == RESULT_OK) {
                 boolean isFavoritedDetail = data.getBooleanExtra("isFavorited", false);
                 int detailPos = data.getIntExtra("position", -1);
@@ -215,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
 
         AutoCompleteTextView keywordInput = findViewById(R.id.keywordInput);
         String input = keywordInput.getText().toString();
+
+        FragmentManager fm = getSupportFragmentManager();
+        int i = 1;
 
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
