@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -106,6 +107,37 @@ public class artistTab extends Fragment {
 
         JSONObject eventJSON = activity.eventJSON;
 
+        String segment1 = "nothing";
+
+        try {
+            segment1 = eventJSON.getJSONArray("classifications").getJSONObject(0).getJSONObject("segment").getString("name");
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        String segment2 = "nothing";
+
+        try {
+            segment1 = eventJSON.getJSONObject("_embedded").getJSONArray("attractions").getJSONObject(0).getJSONArray("classifications").getJSONObject(0).getJSONObject("segment").getString("name");
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        TextView noArtist = view.findViewById(R.id.noArtist);
+
+        if ((!segment1.equals("Music")) && (!segment2.equals("Music")))
+        {
+            noArtist.setVisibility(TextView.VISIBLE);
+
+            return view;
+        }
+        else
+        {
+            noArtist.setVisibility(TextView.GONE);
+        }
+
         //this.queue = Volley.newRequestQueue(this.getContext());
 
 
@@ -130,6 +162,9 @@ public class artistTab extends Fragment {
                 });
 
                 thread.start();
+
+
+
 
 
 
@@ -195,6 +230,10 @@ public class artistTab extends Fragment {
                                 return;
                             }
                         }
+
+                        TextView noArtist = getView().findViewById(R.id.noArtist);
+
+                        noArtist.setVisibility(TextView.VISIBLE);
 
                         abort = true;
                     }

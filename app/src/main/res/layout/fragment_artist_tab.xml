@@ -16,4 +16,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/noArtist"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="@color/darkGrey"
+        android:gravity="center"
+        android:text="Artist/Music data unavailable"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="@+id/artistList"
+        app:layout_constraintEnd_toEndOf="@+id/artistList"
+        app:layout_constraintStart_toStartOf="@+id/artistList"
+        app:layout_constraintTop_toTopOf="@+id/artistList" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
