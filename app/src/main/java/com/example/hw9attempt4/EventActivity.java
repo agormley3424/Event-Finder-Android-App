@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -103,6 +104,12 @@ public class EventActivity extends AppCompatActivity {
                 }
         );
 
+//        android:singleLine="true"
+//        android:ellipsize="marquee"
+//        android:fadingEdge="horizontal"
+//        android:marqueeRepeatLimit="marquee_forever"
+//        android:scrollHorizontally="true"
+
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -184,6 +191,8 @@ public class EventActivity extends AppCompatActivity {
 
 
         int x = 1;
+
+
     }
 
     @Override
@@ -209,9 +218,47 @@ public class EventActivity extends AppCompatActivity {
 
         int i = 1;
 
+        //Toolbar toolbar = findViewById(R.id.toolbar);
 
+//        View v = getLayoutInflater().inflate(R.layout.activity_event_details,null);
+//        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+//
+//        ActionBar actionBar = getSupportActionBar();
+//
+//        TextView titleTextView = null;
+//
+//        try {
+//            Field f = actionBar.getClass().getDeclaredField("mTitleView");
+//            f.setAccessible(true);
+//            titleTextView = (TextView) f.get(actionBar);
+//
+//            titleTextView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+//            titleTextView.setFocusable(true);
+//            titleTextView.setFocusableInTouchMode(true);
+//            titleTextView.requestFocus();
+//            titleTextView.setSingleLine(true);
+//            titleTextView.setSelected(true);
+//            titleTextView.setMarqueeRepeatLimit(-1);
+//
+//        } catch (NoSuchFieldException e) {
+//        } catch (IllegalAccessException e) {
+//        }
+//
         return true;
     }
+
+//    private Toolbar findToolbar(@NonNull ViewGroup viewGroup) {
+//        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+//            View view = viewGroup.getChildAt(i);
+//            if (view.getClass().getName().equals("android.support.v7.widget.Toolbar")
+//                    || view.getClass().getName().equals("android.widget.Toolbar")) {
+//                return (Toolbar) view;
+//            } else if (view instanceof ViewGroup) {
+//                return findToolbar((ViewGroup) view);
+//            }
+//        }
+//        return null;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,8 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
         Picasso.get().load(artists.get(position).album1).into(holder.album1);
         Picasso.get().load(artists.get(position).album2).into(holder.album2);
         Picasso.get().load(artists.get(position).album3).into(holder.album3);
+
+        holder.progress.setProgress(Integer.parseInt(holder.popularity.getText().toString()));
     }
 
     @Override
@@ -64,6 +67,8 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
         ImageView album2;
         ImageView album3;
 
+        ProgressBar progress;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -79,6 +84,7 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
 
             spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
 
+            progress = itemView.findViewById(R.id.artistProgress);
             //Linkify.addLinks(spotifyLink, Linkify.WEB_URLS);
         }
     }
