@@ -288,7 +288,8 @@ public class detailTab extends Fragment {
             Picasso.get().load(url).into(detailImage);
         } catch (JSONException e) {
             e.printStackTrace();
-            detailImage.setVisibility(ImageView.GONE);
+            Picasso.get().load(R.drawable.no_venue).into(detailImage);
+            //detailImage.setVisibility(ImageView.GONE);
         }
 
         //ImageView venueImg = view.findViewById(R.id.detailImage);
