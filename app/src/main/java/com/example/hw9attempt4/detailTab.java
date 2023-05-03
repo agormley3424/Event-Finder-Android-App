@@ -264,7 +264,7 @@ public class detailTab extends Fragment {
 
         TextView detailBuyAt = view.findViewById(R.id.detailBuyAt);
         detailBuyAt.setSelected(true);
-        detailBuyAt.setSingleLine(false);
+        //detailBuyAt.setSingleLine(false);
         //detailBuyAt.setMovementMethod(LinkMovementMethod.getInstance());
         //detailBuyAt.setSingleLine(true);
 

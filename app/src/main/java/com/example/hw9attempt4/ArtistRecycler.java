@@ -48,7 +48,7 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
         holder.spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
         String url = "<a href='" + artists.get(position).spotifyLink + "'>Check out on Spotify </a>";
         holder.spotifyLink.setText(Html.fromHtml(url));
-        
+
 
 
 
