@@ -7,6 +7,7 @@ import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,6 +62,8 @@ public class searchTab extends Fragment {
     private List<String> autoCompleteStrings = new ArrayList<String>();
 
     private ArrayAdapter<String> stringAdapter;
+
+    private Snackbar snackBar = null;
 
     //private String[] testStrings = {"hello, hecko, hemlo"};
 
@@ -170,6 +173,8 @@ public class searchTab extends Fragment {
                 autoDetect.setChecked(false);
                 locationInput.setText("");
 
+                snackBar.dismiss();
+
 
                 //View outerLayout = view.findViewById(R.id.searchContainer);
                 //View innerLayout = view.findViewById(R.id.searchContainerChild);
@@ -201,6 +206,22 @@ public class searchTab extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String keywordInput = ((TextView) view.findViewById(R.id.keywordInput)).getText().toString();
+                String distanceInput = ((TextView) view.findViewById(R.id.distanceInput)).getText().toString();
+                Switch autoDetect = (Switch) view.findViewById(R.id.autoDetect);
+                String locationInput = ((TextView) view.findViewById(R.id.locationInput)).getText().toString();
+
+                if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
+                    View layout = getActivity().findViewById(android.R.id.content);
+                    snackBar = Snackbar.make(layout, "Please fill all fields", Snackbar.LENGTH_LONG);
+                    View sv = snackBar.getView();
+                    sv.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey));
+                    snackBar.setTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
+                    snackBar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
+                    snackBar.show();
+                    return;
+                }
+
                 MainActivity activity = (MainActivity) getActivity();
                 //activity.viewDetails();
 

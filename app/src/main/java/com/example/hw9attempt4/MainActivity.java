@@ -211,28 +211,13 @@ public class MainActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 
-        String keywordInput = ((TextView) findViewById(R.id.keywordInput)).getText().toString();
-        String distanceInput = ((TextView) findViewById(R.id.distanceInput)).getText().toString();
-        Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
-        String locationInput = ((TextView) findViewById(R.id.locationInput)).getText().toString();
-
-        if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
-            View layout = findViewById(android.R.id.content);
-            Snackbar snackBar = Snackbar.make(layout, "Please fill all fields", Snackbar.LENGTH_LONG);
-            View sv = snackBar.getView();
-            sv.setBackgroundColor(ContextCompat.getColor(this, R.color.grey));
-            snackBar.setTextColor(ContextCompat.getColor(this, R.color.darkGrey));
-            snackBar.setActionTextColor(ContextCompat.getColor(this, R.color.darkGrey));
-            snackBar.show();
-            return;
-        }
-
-
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
         stringDest += "&category=" + catString.toLowerCase();
+
+        Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
 
 
 
