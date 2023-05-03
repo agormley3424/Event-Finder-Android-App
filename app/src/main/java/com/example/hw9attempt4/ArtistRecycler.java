@@ -1,6 +1,7 @@
 package com.example.hw9attempt4;
 
 import android.content.Context;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
@@ -42,7 +43,15 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
     public void onBindViewHolder(@NonNull ArtistRecycler.MyViewHolder holder, int position) {
         holder.name.setText(artists.get(position).name);
         holder.followers.setText(artists.get(position).followers);
-        holder.spotifyLink.setText("Check out on Spotify " + artists.get(position).spotifyLink);
+
+        holder.spotifyLink.setClickable(true);
+        holder.spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
+        String url = "<a href='" + artists.get(position).spotifyLink + "'>Check out on Spotify </a>";
+        holder.spotifyLink.setText(Html.fromHtml(url));
+        
+
+
+
         holder.popularity.setText(artists.get(position).popularity);
         Picasso.get().load(artists.get(position).profileImage).into(holder.profile);
         Picasso.get().load(artists.get(position).album1).into(holder.album1);
@@ -82,7 +91,7 @@ public class ArtistRecycler extends RecyclerView.Adapter<ArtistRecycler.MyViewHo
             album2 = itemView.findViewById(R.id.artistAlbum2);
             album3 = itemView.findViewById(R.id.artistAlbum3);
 
-            spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
+            //spotifyLink.setMovementMethod(LinkMovementMethod.getInstance());
 
             progress = itemView.findViewById(R.id.artistProgress);
             //Linkify.addLinks(spotifyLink, Linkify.WEB_URLS);

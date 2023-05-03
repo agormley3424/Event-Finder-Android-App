@@ -33,7 +33,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:popupBackground="@color/black"
-            android:text="Football"
+            android:text="concert"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             app:layout_constraintStart_toStartOf="@+id/keywordText"
