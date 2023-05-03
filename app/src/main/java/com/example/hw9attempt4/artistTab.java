@@ -175,6 +175,7 @@ public class artistTab extends Fragment {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            noArtist.setVisibility(TextView.VISIBLE);
         }
 
 //        ArtistRecycler adapter = new ArtistRecycler(this.getContext(), artistArray);
