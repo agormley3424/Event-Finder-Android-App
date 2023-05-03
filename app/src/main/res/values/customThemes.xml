@@ -6,10 +6,10 @@
     </style>
 
     <style name="Theme.HW9Attempt4.launcherTheme" theme="Theme.SplashScreen">
-        <item name="android:windowSplashScreenBackground">@color/black</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_png</item>
-        <item name="android:windowSplashScreenAnimationDuration">2000</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@color/purple_500</item>
+<!--        <item name="android:windowSplashScreenBackground">@color/black</item>-->
+<!--        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_png</item>-->
+<!--        <item name="android:windowSplashScreenAnimationDuration">2000</item>-->
+<!--        <item name="android:windowSplashScreenIconBackgroundColor">@color/purple_500</item>-->
 
 <!--        <item name="android:windowBackground">@layout/splash_test</item>-->
     </style>
