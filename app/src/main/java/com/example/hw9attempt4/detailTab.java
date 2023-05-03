@@ -244,16 +244,20 @@ public class detailTab extends Fragment {
             switch (status){
                 case "onsale":
                     detailStatus.setText("On Sale");
+                    detailStatus.setBackgroundResource(R.drawable.status_green_background);
                     break;
                 case "rescheduled":
                 case "postponed":
                     detailStatus.setText("Rescheduled");
+                    detailStatus.setBackgroundResource(R.drawable.yellow_background);
                     break;
                 case "offsale":
                     detailStatus.setText("Off Sale");
+                    detailStatus.setBackgroundResource(R.drawable.red_background);
                     break;
                 case "cancelled":
                     detailStatus.setText("Cancelled");
+                    detailStatus.setBackgroundResource(R.drawable.black_background);
                     break;
                 default:
                     detailStatus.setText("Error");

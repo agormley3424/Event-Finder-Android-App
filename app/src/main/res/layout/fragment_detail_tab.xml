@@ -109,38 +109,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/detailGenres" />
 
             <TextView
-                android:id="@+id/detailStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/green"
-                android:text="Ticket Info Here"
-                android:textColor="@color/white"
-                android:theme="@style/greenTextTheme"
-                app:layout_constraintEnd_toEndOf="@+id/detailPrice"
-                app:layout_constraintHorizontal_bias="0.428"
-                app:layout_constraintStart_toStartOf="@+id/detailPrice"
-                app:layout_constraintTop_toBottomOf="@+id/detailPrice" />
-
-            <TextView
                 android:id="@+id/detailBuyAt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:colorAccent="@color/green"
                 android:linksClickable="true"
                 android:text="http://www.example.com"
                 android:textColorLink="@color/green"
                 android:theme="@style/marquee"
-                app:layout_constraintEnd_toEndOf="@+id/detailStatus"
-                app:layout_constraintHorizontal_bias="0.446"
-                app:layout_constraintStart_toStartOf="@+id/detailStatus"
-                app:layout_constraintTop_toBottomOf="@+id/detailStatus"
+                tools:layout_editor_absoluteX="165dp"
+                tools:layout_editor_absoluteY="296dp"
                 tools:visibility="visible" />
 
             <!--                android:clickable="true"-->
             <!--                android:linksClickable="true"-->
             <!--                android:textColorLink="@color/green"-->
+
+            <TextView
+                android:id="@+id/detailStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipToOutline="true"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="@+id/detailPrice"
+                app:layout_constraintStart_toStartOf="@+id/detailPrice"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/textView6"
