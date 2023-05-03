@@ -224,7 +224,9 @@ public class MainActivity extends AppCompatActivity {
         String locationInput = ((TextView) findViewById(R.id.locationInput)).getText().toString();
 
         if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
-            // Launch snackbar
+            View layout = findViewById(android.R.id.content);
+            Snackbar.make(layout, "Please fill all fields", Snackbar.LENGTH_LONG).show();
+            return;
         }
 
 
