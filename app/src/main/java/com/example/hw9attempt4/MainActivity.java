@@ -215,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
+        if (catString.equals("All")) catString = "default";
         stringDest += "&category=" + catString.toLowerCase();
 
         Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
