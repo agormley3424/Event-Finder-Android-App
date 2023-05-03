@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 //        title.setTextColor(col);
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#50C31B'>EventFinder</font>"));
+
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -214,11 +216,16 @@ public class MainActivity extends AppCompatActivity {
     public void showSearchResults() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        AutoCompleteTextView keywordInput = findViewById(R.id.keywordInput);
-        String input = keywordInput.getText().toString();
 
-        FragmentManager fm = getSupportFragmentManager();
-        int i = 1;
+        String keywordInput = ((TextView) findViewById(R.id.keywordInput)).getText().toString();
+        String distanceInput = ((TextView) findViewById(R.id.distanceInput)).getText().toString();
+        Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
+        String locationInput = ((TextView) findViewById(R.id.locationInput)).getText().toString();
+
+        if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
+            // Launch snackbar
+        }
+
 
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
@@ -226,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
         stringDest += "&category=" + catString.toLowerCase();
 
-        Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
+
 
         if (autoDetect.isChecked()) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 //import android.support.v4.app.Fragment;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,11 +161,16 @@ public class searchTab extends Fragment {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //System.out.println("\n Fragment ID is: " + this.hashCode() +"\n");
+                System.out.println("\n Fragment ID is: " + this.hashCode() +"\n");
                 keywordInput.setText("");
                 distanceInput.setText("");
                 categoryInput.setVerticalScrollbarPosition(0);
                 locationInput.setText("");
+
+                //View outerLayout = view.findViewById(R.id.searchContainer);
+                //View innerLayout = view.findViewById(R.id.searchContainerChild);
+
+                //Snackbar.make(innerLayout, "Sample text", Snackbar.LENGTH_LONG).show();
             }
         });
 

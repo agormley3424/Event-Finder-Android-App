@@ -10,7 +10,7 @@
     android:background="@color/grey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout3"
+        android:id="@+id/searchContainerChild"
         android:layout_width="0dp"
         android:layout_height="571dp"
         android:layout_marginStart="29dp"

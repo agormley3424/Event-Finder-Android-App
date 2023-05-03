@@ -73,6 +73,8 @@ public class EventActivity extends AppCompatActivity {
         venueTab.setIcon(R.drawable.venue_icon);
         venueTab.getIcon().setColorFilter(whiteColor, PorterDuff.Mode.SRC_IN);
 
+        /* Sourced from https://stackoverflow.com/questions/26819235/change-android-viewpager-tab-title-programmatically */
+
         tabLayout.setOnTabSelectedListener(
                 new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
 

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SearchParentFragment#newInstance} factory method to
@@ -53,12 +55,19 @@ public class SearchParentFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_search_parent, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_parent, container, false);
+//        View searchParent = view.findViewById(R.id.fragment_container_view);
+//        Snackbar.make(searchParent, "Sample text", Snackbar.LENGTH_LONG).show();
+
+        return view;
     }
 }

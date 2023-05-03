@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -69,8 +71,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View v) {
                 boolean isFavorited = activity.isFavorited(holder.id);
+                //View coord = holder.itemView.findViewById(R.id.searchResultsLayout);
+                View layout = holder.itemView.getRootView().findViewById(android.R.id.content);
+
                 if (isFavorited)
                 {
+                    Snackbar.make(layout, holder.eventName.getText() + " removed from favorites", Snackbar.LENGTH_LONG).show();
                     favorite.setImageResource(R.drawable.heart_outline);
                     activity.removeFavorite(holder.id);
 
@@ -78,6 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
                 else
                 {
+                    Snackbar.make(layout, holder.eventName.getText() + " added to favorites", Snackbar.LENGTH_LONG).show();
                     favorite.setImageResource(R.drawable.heart_filled);
                     activity.addFavorite(holder.getAdapterPosition());
 

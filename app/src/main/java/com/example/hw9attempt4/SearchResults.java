@@ -2,6 +2,7 @@ package com.example.hw9attempt4;
 
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -146,8 +149,6 @@ public class SearchResults extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     // Class defined in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
@@ -194,6 +195,9 @@ public class SearchResults extends Fragment {
         {
             emptyText.setVisibility(TextView.GONE);
         }
+
+//        View layout = getActivity().findViewById(android.R.id.content);
+//        Snackbar.make(layout, "Sample text", Snackbar.LENGTH_LONG).show();
 
         // Inflate the layout for this fragment
         return view;
