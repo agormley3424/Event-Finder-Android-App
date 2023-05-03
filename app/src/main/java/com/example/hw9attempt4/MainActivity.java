@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     private favoriteTab favoriteTab;
 
-    private SearchResults searchResults;
+    private SearchResults searchResults = null;
 
     private searchTab searchTabVar;
 
@@ -405,12 +405,14 @@ public class MainActivity extends AppCompatActivity {
     public void removeFavorite(int i)
     {
         int eventPosition = favorites.get(i).pos;
+        String eventID = favorites.get(i).id;
 
         favorites.remove(i);
         saveFavorites();
         favoriteTab.refreshDelete(i);
 
-        searchResults.refreshResults(eventPosition);
+
+        if (searchResults != null && isInResults(eventID)) searchResults.refreshResults(eventPosition);
     }
 
     public void removeFavorite(String id)
@@ -430,6 +432,19 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < favorites.size(); ++i)
         {
             if (favorites.get(i).id.equals(id))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isInResults(String id)
+    {
+        for (int i = 0; i < eventArray.size(); ++i)
+        {
+            if (eventArray.get(i).id.equals(id))
             {
                 return true;
             }

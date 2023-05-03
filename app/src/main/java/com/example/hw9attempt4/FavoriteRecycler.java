@@ -47,18 +47,18 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
     public void onBindViewHolder(@NonNull FavoriteRecycler.MyViewHolder holder, int position) {
         MainActivity activity = (MainActivity) holder.itemView.getContext();
 
-        List<eventObject> mainEvents = activity.eventArray;
-        int myPos = events.get(position).pos;
+        //List<eventObject> mainEvents = activity.eventArray;
+        //int myPos = events.get(position).pos;
 
-        //holder.eventName.setText(events.get(myPos).get("eventName"));
-        holder.eventName.setText(mainEvents.get(myPos).eventName);
-        holder.eventDate.setText(mainEvents.get(myPos).date);
-        holder.eventTime.setText(mainEvents.get(myPos).time);
-        holder.eventVenue.setText(mainEvents.get(myPos).venue);
-        holder.eventCategory.setText(mainEvents.get(myPos).category);
-        Picasso.get().load(mainEvents.get(myPos).imageURL).into(holder.eventImage);
+        //holder.eventName.setText(events.get(position).get("eventName"));
+        holder.eventName.setText(events.get(position).eventName);
+        holder.eventDate.setText(events.get(position).date);
+        holder.eventTime.setText(events.get(position).time);
+        holder.eventVenue.setText(events.get(position).venue);
+        holder.eventCategory.setText(events.get(position).category);
+        Picasso.get().load(events.get(position).imageURL).into(holder.eventImage);
         holder.position = holder.getAdapterPosition();
-        holder.imageURL = mainEvents.get(myPos).imageURL;
+        holder.imageURL = events.get(position).imageURL;
 
         ImageButton unfavorite = holder.unfavorite;
 
