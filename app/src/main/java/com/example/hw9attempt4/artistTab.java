@@ -141,6 +141,7 @@ public class artistTab extends Fragment {
         //this.queue = Volley.newRequestQueue(this.getContext());
 
 
+        noArtist.setVisibility(TextView.VISIBLE);
         try {
             JSONArray artists = eventJSON.getJSONObject("_embedded").getJSONArray("attractions");
 
@@ -232,10 +233,6 @@ public class artistTab extends Fragment {
                             }
                         }
 
-                        TextView noArtist = getView().findViewById(R.id.noArtist);
-
-                        noArtist.setVisibility(TextView.VISIBLE);
-
                         abort = true;
                     }
                 }, new Response.ErrorListener() {
@@ -306,6 +303,8 @@ public class artistTab extends Fragment {
             newArtist.album3 = response.getJSONArray("items").getJSONObject(2).getJSONArray("images").getJSONObject(0).getString("url");
 
             artistArray.add(newArtist);
+            TextView noArtist = getView().findViewById(R.id.noArtist);
+            noArtist.setVisibility(TextView.GONE);
 
 
             albumsFound = true;
