@@ -43,4 +43,10 @@
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:scrollHorizontally">true</item>
     </style>
+
+    <style name="roundCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="color">@color/black</item>
+    </style>
 </resources>

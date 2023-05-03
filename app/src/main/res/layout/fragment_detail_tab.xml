@@ -19,7 +19,8 @@
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
-            android:background="@color/black"
+            android:background="@drawable/black_background"
+            android:clipToOutline="true"
             android:visibility="visible">
 
             <TextView
@@ -126,10 +127,10 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColorLink="@color/green"
                 android:colorAccent="@color/green"
                 android:linksClickable="true"
                 android:text="http://www.example.com"
+                android:textColorLink="@color/green"
                 android:theme="@style/marquee"
                 app:layout_constraintEnd_toEndOf="@+id/detailStatus"
                 app:layout_constraintHorizontal_bias="0.446"

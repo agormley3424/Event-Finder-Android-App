@@ -13,4 +13,5 @@
     <color name="tan">#FFE392</color>
     <color name="magenta">#8D203C</color>
     <color name="darkerGrey">#141414</color>
+    <color name="transparent">#00000000</color>
 </resources>
