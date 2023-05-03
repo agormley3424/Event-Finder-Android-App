@@ -103,8 +103,6 @@ public class EventActivity extends AppCompatActivity {
                     }
                 }
         );
-
-
     }
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
@@ -161,9 +159,6 @@ public class EventActivity extends AppCompatActivity {
         {
             favoriteButton.setIcon(R.drawable.heart_outline);
         }
-
-
-        int i = 1;
 
         return true;
     }
