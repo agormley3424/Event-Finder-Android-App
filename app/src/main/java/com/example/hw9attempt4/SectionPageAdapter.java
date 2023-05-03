@@ -1,8 +1,5 @@
 package com.example.hw9attempt4;
-//import android.support.annotation.Nullable;
-//import android.support.v4.app.Fragment;
-//import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.FragmentPagerAdapter;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -35,13 +32,6 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
 
     public void replaceFragment(int i , Fragment newFragment)
     {
-//        mFragmentList.remove(i);
-//        mFragmentList.add(i, fragment);
-//        int integer = 1;
-
-        //mFragmentList.get(i);
-
-        //FM.beginTransaction().remove(mFragmentList.get(i)).commit();
 
 
         Fragment searchParent = mFragmentManager.getFragments().get(0);
@@ -54,12 +44,7 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
         ft.replace(R.id.fragment_container_view, newFragment, null);
         ft.commit();
 
-        //mFragmentManager.popBackStack();
-        //mFragmentManager.getFragments();
-//        Fragment toDie = mFragmentList.get(i);
-//        mFragmentList.remove(i);
-//        mFragmentManager.beginTransaction().remove(toDie).commit();
-//        mFragmentList.add(i, newFragment);
+
         int whatever = 2;
     }
 
@@ -71,27 +56,6 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         return mFragmentList.get(i);
-
-        //mFragmentList
-
-//        if (i == 0)
-//        {
-//            if (mFragmentList.get(i) == null)
-//            {
-//                mFragmentAtPos0 = FirstPageFragment.newInstance(new FirstPageFragmentListener()
-//                {
-//                    public void onSwitchToNextFragment()
-//                    {
-//                        mFragmentManager.beginTransaction().remove(mFragmentAtPos0).commit();
-//                        mFragmentAtPos0 = NextFragment.newInstance();
-//                        notifyDataSetChanged();
-//                    }
-//                });
-//            }
-//            return mFragmentAtPos0;
-//        }
-//        else
-//            return SecondPageFragment.newInstance();
     }
 
     @Nullable

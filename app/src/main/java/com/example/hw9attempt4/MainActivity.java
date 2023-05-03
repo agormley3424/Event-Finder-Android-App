@@ -67,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
 
-    //public eventObject[] favorites = new eventObject[0];
-
-    //public ArrayList<eventObject> favorites = new ArrayList<eventObject>();
-
     public List<eventObject> favorites = new ArrayList<eventObject>();
 
     public ArrayList<eventObject> eventArray = new ArrayList<eventObject>();
@@ -134,19 +130,12 @@ public class MainActivity extends AppCompatActivity {
 
         loadFavorites();
         int i = 1;
-//        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
-//                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
-//        saveFavorites();
-        //clearFavorites();
 
         searchTabVar = new searchTab();
 
         getApplicationContext();
         int x = 1;
 
-//        TextView title = (TextView) getSupportActionBar().getTitle();
-//        int col = getResources().getColor(R.color.green);
-//        title.setTextColor(col);
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#50C31B'>EventFinder</font>"));
 
@@ -374,23 +363,6 @@ public class MainActivity extends AppCompatActivity {
         prefsEditor.putString("favoritesList", jsonFavorites);
         prefsEditor.commit();
 
-
-
-        /* Attempt to save files using a Proto DataStore*/
-
-        /* Attempt to save files using a Java FileOutputStream */
-//        try {
-//            FileOutputStream f = openFileOutput("favoritesList", MODE_PRIVATE);
-//            String byteArray = favorites.toArray().toString();
-//            byteArray.getBytes();
-//
-//            eventObject[] simpleFavorites = (eventObject[]) favorites.toArray();
-//            simpleFavorites.
-//            byte[] byteFavorites = (byte[]) favorites.toArray();
-//            f.write(favorites.toString().getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void loadFavorites ()
@@ -403,17 +375,6 @@ public class MainActivity extends AppCompatActivity {
 
         favorites = (gson.fromJson(jsonFavorites, favoriteType.getType()));
 
-//        for (int i = 0; i < favorites.size(); ++i)
-//        {
-//            eventObject obj = gson.fromJson(favorites.get(i), eventObject.class);
-//            favorites.set(i)
-//        }
-        //eventObject[] simpleFavorites = (gson.fromJson(jsonFavorites, eventObject[].class));
-        //This line, 309, is bugging out. Need to figure out how to cast this correctly
-        //List favoriteList = Arrays.asList(simpleFavorites);
-
-        //favorites = (ArrayList) favoriteList;
-        //favorites = new ArrayList<eventObject>(favoriteList);
         int i = 1;
     }
 

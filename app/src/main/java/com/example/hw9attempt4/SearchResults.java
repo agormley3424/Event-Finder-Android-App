@@ -114,13 +114,6 @@ public class SearchResults extends Fragment {
             eventArray.add(new eventObject(imageURL, eventName, venue, category, date, time, id, i));
         }
 
-//        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
-//        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
-//        eventArray.add(new eventObject(bertieImage1, "SEARCH RESULTS",
-//                "string3", "string4", "string5", "string6"));
-//
-//        eventArray.add(new eventObject(bertieImage2, "string8",
-//                "string9", "string10", "string11", "string12"));
     }
 
     /**
@@ -196,8 +189,6 @@ public class SearchResults extends Fragment {
             emptyText.setVisibility(TextView.GONE);
         }
 
-//        View layout = getActivity().findViewById(android.R.id.content);
-//        Snackbar.make(layout, "Sample text", Snackbar.LENGTH_LONG).show();
 
         // Inflate the layout for this fragment
         return view;

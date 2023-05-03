@@ -64,9 +64,6 @@ public class SearchParentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search_parent, container, false);
-        // Inflate the layout for this fragment
-//        View searchParent = view.findViewById(R.id.fragment_container_view);
-//        Snackbar.make(searchParent, "Sample text", Snackbar.LENGTH_LONG).show();
 
         return view;
     }

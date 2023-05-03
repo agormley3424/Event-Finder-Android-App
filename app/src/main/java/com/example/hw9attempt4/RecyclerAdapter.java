@@ -136,14 +136,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-//            if (activity.isFavorited(id))
-//            {
-//                favorite.setImageResource(R.drawable.heart_filled);
-//            }
-//            else
-//            {
-//                favorite.setImageResource(R.drawable.heart_outline);
-//            }
 
 
         }

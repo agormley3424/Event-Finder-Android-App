@@ -73,11 +73,6 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        // Get a handle to the fragment and register the callback.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
-//                .findFragmentById(R.id.venueMap);
-//        mapFragment.getMapAsync(this);
     }
 
     // Map code sourced from https://github.com/googlemaps/android-samples/blob/main/ApiDemos/java/app/src/gms/java/com/example/mapdemo/RawMapViewDemoActivity.java
@@ -315,12 +310,4 @@ public class venueTab extends Fragment implements OnMapReadyCallback {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-    // Get a handle to the GoogleMap object and display marker.
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        googleMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(0, 0))
-//                .title("Marker"));
-//    }
 }

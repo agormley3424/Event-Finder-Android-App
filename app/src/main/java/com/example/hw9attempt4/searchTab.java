@@ -195,14 +195,6 @@ public class searchTab extends Fragment {
             }
         });
 
-//        searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String output = keywordInput.getText().toString();
-//                keywordOutput.setText(output);
-//                System.out.println(output);
-//            }
-//        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,13 +205,6 @@ public class searchTab extends Fragment {
             }
         });
 
-//        clearButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MainActivity activity = (MainActivity) getActivity();
-//                activity.showSearchResults();
-//            }
-//        });
         return view;
     }
 
@@ -232,79 +217,4 @@ public class searchTab extends Fragment {
         keywordInput.setAdapter(stringAdapter);
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        View view = getView();
-//
-//        Button searchButton =  view.findViewById(R.id.searchButton);
-//        Button clearButton =  view.findViewById(R.id.clearButton);
-//        AutoCompleteTextView keywordInput =  view.findViewById(R.id.keywordInput);
-//
-//        Switch autoDetect = view.findViewById(R.id.autoDetect);
-//
-//        stringAdapter = new ArrayAdapter<String>(this.getContext(),
-//                android.R.layout.simple_list_item_1, autoCompleteStrings);
-//
-//        keywordInput.setAdapter(stringAdapter);
-//
-//        autoDetect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView locationInput = (TextView) view.findViewById(R.id.locationInput);
-//
-//                if (locationInput.getVisibility() == View.GONE){
-//                    locationInput.setVisibility(View.VISIBLE);
-//                } else
-//                {
-//                    locationInput.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-//
-//        clearButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                System.out.println("\n Fragment ID is: " + this.hashCode() +"\n");
-//            }
-//        });
-//
-//        Context context = getContext();
-//
-//        keywordInput.addTextChangedListener(new TextWatcher() {
-//
-//            public void afterTextChanged(Editable s) {
-//                String ticketMaster = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=ZUe4QATYrGXNGmv3VGkGdAz0gC3XXeVo&keyword=" + keywordInput.getText();
-//
-//                getSuggestions(ticketMaster);
-//            }
-//
-//            public void beforeTextChanged(CharSequence s, int start,
-//                                          int count, int after) {
-//            }
-//
-//            public void onTextChanged(CharSequence s, int start,
-//                                      int before, int count) {
-//            }
-//        });
-//
-////        searchButton.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                String output = keywordInput.getText().toString();
-////                keywordOutput.setText(output);
-////                System.out.println(output);
-////            }
-////        });
-//
-//        searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MainActivity activity = (MainActivity) getActivity();
-//                //activity.viewDetails();
-//                activity.showSearchResults();
-//            }
-//        });
-//    }
 }

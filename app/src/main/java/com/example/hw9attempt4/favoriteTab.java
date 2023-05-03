@@ -69,24 +69,6 @@ public class favoriteTab extends Fragment {
         }
     }
 
-//    public void createList()
-//    {
-//        String bertieImage1 = "https://static.wikia.nocookie.net/tucabertie/images/9/9d/Bertie_Songthrush.png/revision/latest?cb=20200814011717";
-//        String bertieImage2 = "https://variety.com/wp-content/uploads/2019/03/tucabertie_season1_episode1_00_00_19_03.png";
-//        eventArray.add(new eventObject(bertieImage1, "FAVORITES",
-//                "string3", "string4", "string5", "string6"));
-//
-//        eventArray.add(new eventObject(bertieImage2, "string8",
-//                "string9", "string10", "string11", "string12"));
-//    }
-
-//    public eventObject dynamicAdd()
-//    {
-//        String bertieImage = "https://media.cdn.adultswim.com/uploads/20220829/thumbnails/2_228291541119-TucaAndBertie_310_TheMole.png";
-//        return new eventObject(bertieImage, "FAVORITES",
-//                "stringB", "stringC", "stringD", "stringE");
-//    }
-
     // Class defined in reference to https://www.youtube.com/watch?v=Mc0XT58A1Z4
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,20 +102,6 @@ public class favoriteTab extends Fragment {
             emptyText.setVisibility(TextView.GONE);
         }
 
-//        activity.clearFavorites();
-//        refreshFavorites();
-
-
-
-
-        //eventArray.add(2, dynamicAdd());
-
-        //adapter.notifyItemInserted(2);
-
-        //eventArray.remove(2);
-
-        //adapter.notifyItemRemoved(2);
-
         // Inflate the layout for this fragment
         return view;
     }
@@ -161,8 +129,4 @@ public class favoriteTab extends Fragment {
         }
     }
 
-    //    public void removeFavorite(int index)
-//    {
-//        favorites.remove(index);
-//    }
 }

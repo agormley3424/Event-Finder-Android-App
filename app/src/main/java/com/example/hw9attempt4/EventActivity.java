@@ -104,11 +104,6 @@ public class EventActivity extends AppCompatActivity {
                 }
         );
 
-//        android:singleLine="true"
-//        android:ellipsize="marquee"
-//        android:fadingEdge="horizontal"
-//        android:marqueeRepeatLimit="marquee_forever"
-//        android:scrollHorizontally="true"
 
     }
 
@@ -142,53 +137,6 @@ public class EventActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        try {
-//            Field f = toolbar.getClass().getDeclaredField("mTitleTextView");
-//            f.setAccessible(true);
-//            TextView barTitle = (TextView) f.get(toolbar);
-//
-//            barTitle.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-//            barTitle.setFocusable(true);
-//            barTitle.setFocusableInTouchMode(true);
-//            barTitle.requestFocus();
-//            barTitle.setSingleLine(true);
-//            barTitle.setSelected(true);
-//            barTitle.setMarqueeRepeatLimit(-1);
-//        } catch (NoSuchFieldException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        }
-
-//        TextView title = (TextView) actionBar.getCustomView();
-//
-//// set the ellipsize mode to MARQUEE and make it scroll only once
-//        title.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-//        title.setMarqueeRepeatLimit(1);
-//// in order to start strolling, it has to be focusable and focused
-//        title.setFocusable(true);
-//        title.setFocusableInTouchMode(true);
-//        title.requestFocus();
-//
-//        title.setText("TEST");
-
-//        View v = getWindow().getDecorView();
-//        int resId = getResources().getIdentifier("barID", "id", "android");
-//        TextView title = (TextView) v.findViewById(resId);
-//
-//        // Set the ellipsize mode to MARQUEE and make it scroll only once
-//        title.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-//        title.setMarqueeRepeatLimit(-1);
-//
-//        // In order to start strolling, it has to be focusable and focused
-//        title.setFocusable(true);
-//        title.setFocusableInTouchMode(true);
-//        title.requestFocus();
-
-        //View v = findViewById(R.id.twitterIcon);
-
 
         int x = 1;
 
@@ -214,51 +162,11 @@ public class EventActivity extends AppCompatActivity {
             favoriteButton.setIcon(R.drawable.heart_outline);
         }
 
-        //View v = findViewById(R.id.favoriteButton);
 
         int i = 1;
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-
-//        View v = getLayoutInflater().inflate(R.layout.activity_event_details,null);
-//        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-//
-//        ActionBar actionBar = getSupportActionBar();
-//
-//        TextView titleTextView = null;
-//
-//        try {
-//            Field f = actionBar.getClass().getDeclaredField("mTitleView");
-//            f.setAccessible(true);
-//            titleTextView = (TextView) f.get(actionBar);
-//
-//            titleTextView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-//            titleTextView.setFocusable(true);
-//            titleTextView.setFocusableInTouchMode(true);
-//            titleTextView.requestFocus();
-//            titleTextView.setSingleLine(true);
-//            titleTextView.setSelected(true);
-//            titleTextView.setMarqueeRepeatLimit(-1);
-//
-//        } catch (NoSuchFieldException e) {
-//        } catch (IllegalAccessException e) {
-//        }
-//
         return true;
     }
-
-//    private Toolbar findToolbar(@NonNull ViewGroup viewGroup) {
-//        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-//            View view = viewGroup.getChildAt(i);
-//            if (view.getClass().getName().equals("android.support.v7.widget.Toolbar")
-//                    || view.getClass().getName().equals("android.widget.Toolbar")) {
-//                return (Toolbar) view;
-//            } else if (view instanceof ViewGroup) {
-//                return findToolbar((ViewGroup) view);
-//            }
-//        }
-//        return null;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -322,34 +230,4 @@ public class EventActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        finish();
-//    }
-
-    //    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        Intent sendBack = new Intent();
-//        sendBack.putExtra("isFavorited", isFavorited);
-//        sendBack.putExtra("position", myPos);
-//        setResult(RESULT_OK, sendBack);
-//        finish();
-//    }
-
-    //    void clickTwitter(View v)
-//    {
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com"));
-//        startActivity(browserIntent);
-//    }
-//
-//    void clickFacebook(View v)
-//    {
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com"));
-//        startActivity(browserIntent);
-//    }
 }
