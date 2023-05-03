@@ -45,11 +45,11 @@
             android:layout_weight="1"
             android:backgroundTint="@color/green"
             android:ems="10"
+            android:hint="Enter the Keyword"
             android:inputType="textPersonName"
             android:popupBackground="@color/black"
-            android:text="concert"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="#818181"
             app:layout_constraintStart_toStartOf="@+id/keywordText"
             app:layout_constraintTop_toBottomOf="@+id/keywordText" />
 
@@ -60,10 +60,10 @@
             android:layout_weight="1"
             android:backgroundTint="@color/green"
             android:ems="10"
+            android:hint="Enter the Location"
             android:inputType="textPersonName"
-            android:text="Los Angeles"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="#818181"
             app:layout_constraintStart_toStartOf="@+id/keywordText4"
             app:layout_constraintTop_toBottomOf="@+id/keywordText4" />
 
@@ -75,7 +75,7 @@
             android:backgroundTint="@color/green"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="50"
+            android:text="10"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             app:layout_constraintStart_toStartOf="@+id/keywordText2"
