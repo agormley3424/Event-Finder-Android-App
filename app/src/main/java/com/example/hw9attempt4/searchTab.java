@@ -164,8 +164,10 @@ public class searchTab extends Fragment {
                 System.out.println("\n Fragment ID is: " + this.hashCode() +"\n");
                 keywordInput.setText("");
                 distanceInput.setText("");
-                categoryInput.setVerticalScrollbarPosition(0);
+                categoryInput.setSelection(0);
+                autoDetect.setChecked(false);
                 locationInput.setText("");
+
 
                 //View outerLayout = view.findViewById(R.id.searchContainer);
                 //View innerLayout = view.findViewById(R.id.searchContainerChild);
