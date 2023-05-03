@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 //        addFavorite(new eventObject("https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png",
 //                "testEvent", "testVenue", "testCategory", "testDate", "testTime"));
 //        saveFavorites();
-        clearFavorites();
+        //clearFavorites();
 
         searchTabVar = new searchTab();
 

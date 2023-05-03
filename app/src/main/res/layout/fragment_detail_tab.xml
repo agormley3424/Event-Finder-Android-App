@@ -117,8 +117,9 @@
                 android:text="http://www.example.com"
                 android:textColorLink="@color/green"
                 android:theme="@style/marquee"
-                tools:layout_editor_absoluteX="165dp"
-                tools:layout_editor_absoluteY="296dp"
+                app:layout_constraintEnd_toEndOf="@+id/detailStatus"
+                app:layout_constraintStart_toStartOf="@+id/detailStatus"
+                app:layout_constraintTop_toTopOf="@+id/textView9"
                 tools:visibility="visible" />
 
             <!--                android:clickable="true"-->
