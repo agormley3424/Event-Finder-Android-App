@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
@@ -241,7 +242,27 @@ public class EventActivity extends AppCompatActivity {
         {
             isFavorited = !isFavorited;
 
-            int id = isFavorited ? R.drawable.heart_filled : R.drawable.heart_outline;
+            int id;
+            View layout = findViewById(android.R.id.content);
+
+            String eventName = null;
+            try {
+                eventName = eventJSON.getString("name");
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            if (isFavorited)
+            {
+                id = R.drawable.heart_filled;
+                Snackbar.make(layout, eventName + " added to favorites", Snackbar.LENGTH_LONG).show();
+            }
+            else
+            {
+                id = R.drawable.heart_outline;
+                Snackbar.make(layout, eventName + " removed from favorites", Snackbar.LENGTH_LONG).show();
+            }
 
             item.setIcon(id);
 
