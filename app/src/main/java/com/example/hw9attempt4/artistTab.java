@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
@@ -130,6 +131,7 @@ public class artistTab extends Fragment {
         if ((!segment1.equals("Music")) && (!segment2.equals("Music")))
         {
             noArtist.setVisibility(TextView.VISIBLE);
+
 
             return view;
         }

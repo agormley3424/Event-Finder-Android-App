@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 //import android.support.v4.app.Fragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -201,6 +203,14 @@ public class searchTab extends Fragment {
             public void onClick(View v) {
                 MainActivity activity = (MainActivity) getActivity();
                 //activity.viewDetails();
+
+                ConstraintLayout boxLayout = view.findViewById(R.id.searchContainerChild);
+                boxLayout.setVisibility(ConstraintLayout.INVISIBLE);
+
+
+                ProgressBar searchProgress = view.findViewById(R.id.searchProgress);
+                searchProgress.setVisibility(ProgressBar.VISIBLE);
+
                 activity.showSearchResults();
             }
         });
