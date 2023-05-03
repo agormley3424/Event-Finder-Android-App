@@ -211,12 +211,22 @@ public class EventActivity extends AppCompatActivity {
             if (isFavorited)
             {
                 id = R.drawable.heart_filled;
-                Snackbar.make(layout, eventName + " added to favorites", Snackbar.LENGTH_LONG).show();
+                Snackbar snackBar = Snackbar.make(layout, eventName + " added to favorites", Snackbar.LENGTH_LONG);
+                View sv = snackBar.getView();
+                sv.setBackgroundColor(ContextCompat.getColor(this, R.color.grey));
+                snackBar.setTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+                snackBar.setActionTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+                snackBar.show();
             }
             else
             {
                 id = R.drawable.heart_outline;
-                Snackbar.make(layout, eventName + " removed from favorites", Snackbar.LENGTH_LONG).show();
+                Snackbar snackBar = Snackbar.make(layout, eventName + " removed from favorites", Snackbar.LENGTH_LONG);
+                View sv = snackBar.getView();
+                sv.setBackgroundColor(ContextCompat.getColor(this, R.color.grey));
+                snackBar.setTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+                snackBar.setActionTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+                snackBar.show();
             }
 
             item.setIcon(id);

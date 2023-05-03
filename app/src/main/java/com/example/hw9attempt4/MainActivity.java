@@ -1,5 +1,6 @@
 package com.example.hw9attempt4;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     private SearchResults searchResults = null;
 
     private searchTab searchTabVar;
+
+    private Activity myActivity = this;
 
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
@@ -214,7 +218,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
             View layout = findViewById(android.R.id.content);
-            Snackbar.make(layout, "Please fill all fields", Snackbar.LENGTH_LONG).show();
+            Snackbar snackBar = Snackbar.make(layout, "Please fill all fields", Snackbar.LENGTH_LONG);
+            View sv = snackBar.getView();
+            sv.setBackgroundColor(ContextCompat.getColor(this, R.color.grey));
+            snackBar.setTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+            snackBar.setActionTextColor(ContextCompat.getColor(this, R.color.darkGrey));
+            snackBar.show();
             return;
         }
 
@@ -305,7 +314,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         View layout = findViewById(android.R.id.content);
-                        Snackbar.make(layout, "Error in Ticketmaster request", Snackbar.LENGTH_LONG).show();
+                        Snackbar snackBar = Snackbar.make(layout, "Error in Ticketmaster request", Snackbar.LENGTH_LONG);
+                        View sv = snackBar.getView();
+                        sv.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.grey));
+                        snackBar.setTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                        snackBar.setActionTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                        snackBar.show();
 
                     }
                 });

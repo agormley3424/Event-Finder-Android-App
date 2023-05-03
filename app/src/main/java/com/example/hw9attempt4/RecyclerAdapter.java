@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -76,7 +77,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
                 if (isFavorited)
                 {
-                    Snackbar.make(layout, holder.eventName.getText() + " removed from favorites", Snackbar.LENGTH_LONG).show();
+                    Snackbar snackBar = Snackbar.make(layout, holder.eventName.getText() + " removed from favorites", Snackbar.LENGTH_LONG);
+                    View sv = snackBar.getView();
+                    sv.setBackgroundColor(ContextCompat.getColor(activity, R.color.grey));
+                    snackBar.setTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                    snackBar.setActionTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                    snackBar.show();
                     favorite.setImageResource(R.drawable.heart_outline);
                     activity.removeFavorite(holder.id);
 
@@ -84,7 +90,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
                 else
                 {
-                    Snackbar.make(layout, holder.eventName.getText() + " added to favorites", Snackbar.LENGTH_LONG).show();
+                    Snackbar snackBar = Snackbar.make(layout, holder.eventName.getText() + " added to favorites", Snackbar.LENGTH_LONG);
+                    View sv = snackBar.getView();
+                    sv.setBackgroundColor(ContextCompat.getColor(activity, R.color.grey));
+                    snackBar.setTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                    snackBar.setActionTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                    snackBar.show();
                     favorite.setImageResource(R.drawable.heart_filled);
                     activity.addFavorite(holder.getAdapterPosition());
 

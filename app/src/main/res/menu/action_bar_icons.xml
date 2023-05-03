@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/twitterIcon"
-        android:icon="@drawable/twitter"
+        android:icon="@drawable/twitter_circle"
         android:title="Twitter"
         app:showAsAction="ifRoom|withText"></item>
     <item

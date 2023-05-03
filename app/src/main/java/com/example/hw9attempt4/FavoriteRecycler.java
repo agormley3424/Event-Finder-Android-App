@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -68,7 +69,14 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
             @Override
             public void onClick(View v) {
                 View layout = holder.itemView.getRootView().findViewById(android.R.id.content);
-                Snackbar.make(layout, holder.eventName.getText() + " removed from favorites", Snackbar.LENGTH_LONG).show();
+                Snackbar snackBar = Snackbar.make(layout, holder.eventName.getText() + " removed from favorites", Snackbar.LENGTH_LONG);
+                View sv = snackBar.getView();
+                sv.setBackgroundColor(ContextCompat.getColor(activity, R.color.grey));
+                snackBar.setTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                snackBar.setActionTextColor(ContextCompat.getColor(activity, R.color.darkGrey));
+                snackBar.show();
+
+
                 unfavorite.setImageResource(R.drawable.heart_outline);
                 activity.removeFavorite(holder.getAdapterPosition());
             }
