@@ -144,6 +144,8 @@ public class searchTab extends Fragment {
 
         Switch autoDetect = view.findViewById(R.id.autoDetect);
 
+
+
         stringAdapter = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_list_item_1, autoCompleteStrings);
 
@@ -153,6 +155,11 @@ public class searchTab extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView locationInput = (TextView) view.findViewById(R.id.locationInput);
+
+                if (!((MainActivity) getActivity()).checkGPS())
+                {
+                    return;
+                }
 
                 if (locationInput.getVisibility() == View.GONE){
                     locationInput.setVisibility(View.VISIBLE);

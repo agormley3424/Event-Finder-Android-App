@@ -55,7 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
 
     private ViewPager mViewPager;
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     public SharedPreferences prefs;
 
+    public Location userLocation = null;
+
     private Gson gson = new Gson();
 
     private favoriteTab favoriteTab;
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchResults searchResults = null;
 
     private searchTab searchTabVar;
+    public boolean hasGPS;
 
     private Activity myActivity = this;
 
@@ -115,6 +118,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            int i = 1;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+
+
         //setTheme(R.style.Theme_HW9Attempt4);
 
         setContentView(R.layout.activity_main);
@@ -130,8 +143,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.queue = Volley.newRequestQueue(this);
 
-        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
-
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         loadFavorites();
         int i = 1;
 
@@ -142,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#50C31B'>EventFinder</font>"));
-
     }
+
 
     // Sourced from 'https://medium.com/@royanimesh2211/swipeable-tab-layout-using-view-pager-and-fragment-in-android-ea62f839502b'
     private void setupViewPager(ViewPager viewPager) {
@@ -196,11 +212,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     public void viewSearchResults() {
         searchResults = new SearchResults();
         adapter.replaceFragment(0, searchResults);
@@ -209,6 +220,15 @@ public class MainActivity extends AppCompatActivity {
     // Replaces the search fragment with the results fragment
     public void showSearchResults() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            hasGPS = true;
+        }
+        else
+        {
+            hasGPS = false;
+        }
+
 
 
         String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
@@ -222,18 +242,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if (autoDetect.isChecked()) {
+        if (autoDetect.isChecked() && hasGPS) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 //requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 
                 return;
             }
 
-            Location userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (userLocation == null)
-            {
-                userLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-            }
+//            Location userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            if (userLocation == null)
+//            {
+//                userLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+//            }
 
             stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
 
@@ -265,6 +285,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return returnAddress;
+    }
+
+    public boolean checkGPS()
+    {
+        return !(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
     }
 
     // Code sourced from 'https://google.github.io/volley/request.html'
@@ -451,6 +476,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        // Handle new location update
+        userLocation = location;
+        int i = 1;
     }
 
 
