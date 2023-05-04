@@ -155,11 +155,12 @@ public class searchTab extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView locationInput = (TextView) view.findViewById(R.id.locationInput);
+                MainActivity activity = (MainActivity) getActivity();
 
-                if (!((MainActivity) getActivity()).checkGPS())
-                {
-                    return;
-                }
+//                if (!(activity.hasGPS))
+//                {
+//                    return;
+//                }
 
                 if (locationInput.getVisibility() == View.GONE){
                     locationInput.setVisibility(View.VISIBLE);

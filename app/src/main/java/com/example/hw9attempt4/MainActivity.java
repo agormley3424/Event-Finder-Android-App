@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private Activity myActivity = this;
 
+    private String stringDest = null;
+
+    private boolean requestSatisfied = true;
+
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
         private final FragmentManager mFragmentManager;
@@ -120,12 +124,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            int i = 1;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            hasGPS = false;
+//        } else {
+//            hasGPS = true;
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+//        }
 
 
         //setTheme(R.style.Theme_HW9Attempt4);
@@ -190,25 +196,23 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-                boolean isFavoritedDetail = data.getBooleanExtra("isFavorited", false);
-                int detailPos = data.getIntExtra("position", -1);
-                boolean isFavoritedHere = isFavorited(eventArray.get(detailPos).id);
+            boolean isFavoritedDetail = data.getBooleanExtra("isFavorited", false);
+            int detailPos = data.getIntExtra("position", -1);
+            boolean isFavoritedHere = isFavorited(eventArray.get(detailPos).id);
 
-                // Do nothing
-                if (isFavoritedDetail == isFavoritedHere)
-                {
-                    return;
-                }
-                // Add to favorites
-                else if (isFavoritedDetail)
-                {
-                    addFavorite(detailPos);
-                }
-                // Remove from favorites
-                else // if (!isFavoritedDetail)
-                {
-                    removeFavorite(eventArray.get(detailPos).id);
-                }
+            // Do nothing
+            if (isFavoritedDetail == isFavoritedHere) {
+                return;
+            }
+            // Add to favorites
+            else if (isFavoritedDetail) {
+                addFavorite(detailPos);
+            }
+            // Remove from favorites
+            else // if (!isFavoritedDetail)
+            {
+                removeFavorite(eventArray.get(detailPos).id);
+            }
         }
     }
 
@@ -219,19 +223,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     // Replaces the search fragment with the results fragment
     public void showSearchResults() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if (!(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            hasGPS = true;
-        }
-        else
-        {
-            hasGPS = false;
-        }
-
-
-
-        String stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
+        stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();
@@ -241,30 +233,47 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Switch autoDetect = (Switch) findViewById(R.id.autoDetect);
 
 
+        if (autoDetect.isChecked()) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                //requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
+//
+//                return;
+//            }
 
-        if (autoDetect.isChecked() && hasGPS) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                //requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
-
-                return;
-            }
-
-//            Location userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//
+//            }
+//            userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 //            if (userLocation == null)
 //            {
 //                userLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 //            }
+//
 
-            stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
+            try {
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-            stringDest += "&locationSearch=false";
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+                    requestSatisfied = false;
+                }
+            } catch (java.lang.SecurityException e)
+            {
+                e.printStackTrace();
+            }
+
+
         } else {
             String rawAddress = ((TextView) findViewById(R.id.locationInput)).getText().toString();
             stringDest += "&location=" + stringToAddress(rawAddress);
             stringDest += "&locationSearch=true";
+
+            getJSON(stringDest);
         }
 
-        getJSON(stringDest);
+
         //getString(stringDest);
 
        // System.out.println(stringDest);
@@ -286,12 +295,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         return returnAddress;
     }
-
-    public boolean checkGPS()
-    {
-        return !(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
-    }
-
     // Code sourced from 'https://google.github.io/volley/request.html'
 
     public void getString(String url) {
@@ -325,12 +328,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         View layout = findViewById(android.R.id.content);
+
                         Snackbar snackBar = Snackbar.make(layout, "Error in Ticketmaster request", Snackbar.LENGTH_LONG);
                         View sv = snackBar.getView();
                         sv.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.grey));
                         snackBar.setTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
                         snackBar.setActionTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
                         snackBar.show();
+
+                        findViewById(R.id.searchContainerChild).setVisibility(View.VISIBLE);
+                        findViewById(R.id.searchProgress).setVisibility(View.INVISIBLE);
 
                     }
                 });
@@ -481,8 +488,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onLocationChanged(Location location) {
         // Handle new location update
-        userLocation = location;
+
+        if (!requestSatisfied)
+        {
+            userLocation = location;
+
+            stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
+
+            stringDest += "&locationSearch=false";
+
+            getJSON(stringDest);
+
+            requestSatisfied = true;
+        }
+
+
         int i = 1;
+    }
+
+    public boolean hasGPS()
+    {
+        return !(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
     }
 
 
