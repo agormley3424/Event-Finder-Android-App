@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,7 +57,17 @@ public class FavoriteRecycler extends RecyclerView.Adapter<FavoriteRecycler.MyVi
         //holder.eventName.setText(events.get(position).get("eventName"));
         holder.eventName.setText(events.get(position).eventName);
         holder.eventDate.setText(events.get(position).date);
-        holder.eventTime.setText(events.get(position).time);
+        try {
+            Date militaryFormat = new SimpleDateFormat("HH:mm").parse(events.get(position).time);
+            String amPM = new SimpleDateFormat("h:mm a").format(militaryFormat);
+            holder.eventTime.setText(amPM);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            holder.eventTime.setText(events.get(position).time);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            holder.eventTime.setText("No time found");
+        }
         holder.eventVenue.setText(events.get(position).venue);
         holder.eventCategory.setText(events.get(position).category);
         Picasso.get().load(events.get(position).imageURL).into(holder.eventImage);
