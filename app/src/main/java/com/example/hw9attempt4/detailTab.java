@@ -18,6 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link detailTab#newInstance} factory method to
@@ -120,10 +124,32 @@ public class detailTab extends Fragment {
         detailTime.setSelected(true);
 
         try {
-            detailTime.setText(eventJSON.getJSONObject("dates").getJSONObject("start").getString("localTime"));
+            String militaryTime = eventJSON.getJSONObject("dates").getJSONObject("start").getString("localTime");
+            Date militaryFormat = new SimpleDateFormat("HH:mm").parse(militaryTime);
+            String amPM = new SimpleDateFormat("h:mm a").format(militaryFormat);
+            detailTime.setText(amPM);
+
         } catch (JSONException e) {
             e.printStackTrace();
             detailTime.setText("No times found");
+
+        } catch (NullPointerException e)
+        {
+            e.printStackTrace();
+            try {
+                detailTime.setText(eventJSON.getJSONObject("dates").getJSONObject("start").getString("localTime"));
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        } catch (ParseException e)
+        {
+            e.printStackTrace();
+            try {
+                detailTime.setText(eventJSON.getJSONObject("dates").getJSONObject("start").getString("localTime"));
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
         TextView detailGenres = view.findViewById(R.id.detailGenres);
