@@ -158,18 +158,18 @@ public class searchTab extends Fragment {
                 Switch me = (Switch) view.findViewById(R.id.autoDetect);
                 MainActivity activity = (MainActivity) getActivity();
 
-                if (!(activity.hasGPS))
-                {
-                    me.setChecked(false);
-                    View layout = getActivity().findViewById(android.R.id.content);
-                    snackBar = Snackbar.make(layout, "Please enable location permissions to use auto-detect", Snackbar.LENGTH_LONG);
-                    View sv = snackBar.getView();
-                    sv.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey));
-                    snackBar.setTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
-                    snackBar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
-                    snackBar.show();
-                    return;
-                }
+//                if (!(activity.hasGPS))
+//                {
+//                    me.setChecked(false);
+//                    View layout = getActivity().findViewById(android.R.id.content);
+//                    snackBar = Snackbar.make(layout, "Please enable location permissions to use auto-detect", Snackbar.LENGTH_LONG);
+//                    View sv = snackBar.getView();
+//                    sv.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey));
+//                    snackBar.setTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
+//                    snackBar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.darkGrey));
+//                    snackBar.show();
+//                    return;
+//                }
 
                 if (locationInput.getVisibility() == View.GONE){
                     locationInput.setVisibility(View.VISIBLE);
