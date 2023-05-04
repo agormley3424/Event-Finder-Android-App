@@ -281,7 +281,20 @@ public class artistTab extends Fragment {
             String albumString = "https://hw8-380107.wl.r.appspot.com/spotifyAlbums?artistID=" + artistJSON.getString("id");
 
             newArtist.name = artistJSON.getString("name");
-            newArtist.followers = artistJSON.getJSONObject("followers").getString("total");
+
+            newArtist.followers = "";
+            int followers = Integer.parseInt(artistJSON.getJSONObject("followers").getString("total"));
+            if (followers < 1000000)
+            {
+                newArtist.followers += String.valueOf(followers / 1000) + "K";
+            } else
+            {
+                newArtist.followers += String.valueOf(followers / 1000000) + "M";
+            }
+
+            //newArtist.followers = artistJSON.getJSONObject("followers").getString("total");
+
+
             newArtist.popularity = artistJSON.getString("popularity");
             newArtist.spotifyLink = artistJSON.getJSONObject("external_urls").getString("spotify");
             newArtist.profileImage = artistJSON.getJSONArray("images").getJSONObject(0).getString("url");
