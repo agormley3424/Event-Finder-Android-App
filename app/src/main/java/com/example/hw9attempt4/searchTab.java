@@ -231,6 +231,8 @@ public class searchTab extends Fragment {
                 String distanceInput = ((TextView) view.findViewById(R.id.distanceInput)).getText().toString();
                 Switch autoDetect = (Switch) view.findViewById(R.id.autoDetect);
                 String locationInput = ((TextView) view.findViewById(R.id.locationInput)).getText().toString();
+                View boxLayout = view.findViewById(R.id.searchContainerChild);
+                View searchProgress = view.findViewById(R.id.searchProgress);
 
                 if (keywordInput.equals("") || distanceInput.equals("") || ((!autoDetect.isChecked()) && locationInput.equals(""))){
                     View layout = getActivity().findViewById(android.R.id.content);
@@ -242,16 +244,14 @@ public class searchTab extends Fragment {
                     snackBar.show();
                     return;
                 }
+                else
+                {
+                    boxLayout.setVisibility(ConstraintLayout.INVISIBLE);
+                    searchProgress.setVisibility(ProgressBar.VISIBLE);
+                }
 
                 MainActivity activity = (MainActivity) getActivity();
                 //activity.viewDetails();
-
-                ConstraintLayout boxLayout = view.findViewById(R.id.searchContainerChild);
-                boxLayout.setVisibility(ConstraintLayout.INVISIBLE);
-
-
-                ProgressBar searchProgress = view.findViewById(R.id.searchProgress);
-                searchProgress.setVisibility(ProgressBar.VISIBLE);
 
                 activity.showSearchResults();
             }
