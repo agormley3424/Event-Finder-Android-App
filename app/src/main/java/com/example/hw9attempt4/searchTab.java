@@ -189,6 +189,7 @@ public class searchTab extends Fragment {
                 categoryInput.setSelection(0);
                 autoDetect.setChecked(false);
                 locationInput.setText("");
+                locationInput.setVisibility(View.VISIBLE);
 
                 if (snackBar != null)
                 {
