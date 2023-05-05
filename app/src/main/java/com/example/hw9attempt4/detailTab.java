@@ -312,6 +312,7 @@ public class detailTab extends Fragment {
         try {
             String url = eventJSON.getJSONObject("seatmap").getString("staticUrl");
             Picasso.get().load(url).into(detailImage);
+            System.out.println(url);
         } catch (JSONException e) {
             e.printStackTrace();
             Picasso.get().load(R.drawable.no_venue).into(detailImage);

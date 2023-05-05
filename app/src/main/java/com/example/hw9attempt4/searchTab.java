@@ -208,7 +208,7 @@ public class searchTab extends Fragment {
         keywordInput.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-                String ticketMaster = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=ZUe4QATYrGXNGmv3VGkGdAz0gC3XXeVo&keyword=" + keywordInput.getText();
+                String ticketMaster = "https://hw9-385403.wl.r.appspot.com/autocomplete?keyword=" + keywordInput.getText();
 
                 getSuggestions(ticketMaster);
             }
