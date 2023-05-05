@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
@@ -54,8 +55,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
 
 
     private ViewPager mViewPager;
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private String stringDest = null;
 
-    private boolean requestSatisfied = true;
+    private boolean requestSatisfied = false;
 
     public class MyAdapter extends SectionPageAdapter {
         static final int NUM_ITEMS = 2;
@@ -234,6 +238,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
 
         if (autoDetect.isChecked()) {
+
+            Executor newThread = Executors.newSingleThreadExecutor();
+            CancellationSignal cancelSignal = new CancellationSignal();
+            Consumer<Location> consumer = new Consumer<Location>() {
+                @Override
+                public void accept(Location location) {
+                    userLocation = location;
+                    requestSatisfied = true;
+                }
+            };
+
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                View layout = findViewById(android.R.id.content);
+                Snackbar snackBar = Snackbar.make(layout, "Error in Auto-Detection, please enable location permission", Snackbar.LENGTH_LONG);
+                View sv = snackBar.getView();
+                sv.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.grey));
+                snackBar.setTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                snackBar.setActionTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                snackBar.show();
+                return;
+            }
+            locationManager.getCurrentLocation(LocationManager.GPS_PROVIDER, cancelSignal, newThread, consumer);
+
+            while (!requestSatisfied);
+
+            requestSatisfied = false;
+
+            if (userLocation == null)
+            {
+                View layout = findViewById(android.R.id.content);
+                Snackbar snackBar = Snackbar.make(layout, "Error in Auto-Detection, please try manual search instead", Snackbar.LENGTH_LONG);
+                View sv = snackBar.getView();
+                sv.setBackgroundColor(ContextCompat.getColor(myActivity, R.color.grey));
+                snackBar.setTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                snackBar.setActionTextColor(ContextCompat.getColor(myActivity, R.color.darkGrey));
+                snackBar.show();
+                return;
+            }
+
+            stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
+            stringDest += "&locationSearch=false";
 //            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //                //requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
 //
@@ -251,27 +298,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //            }
 //
 
-            try {
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
-                    requestSatisfied = false;
-                }
-            } catch (java.lang.SecurityException e)
-            {
-                e.printStackTrace();
-            }
+//            try {
+//                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                } else {
+//                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
+//                    requestSatisfied = false;
+//                }
+//            } catch (java.lang.SecurityException e)
+//            {
+//                e.printStackTrace();
+//            }
 
 
         } else {
             String rawAddress = ((TextView) findViewById(R.id.locationInput)).getText().toString();
             stringDest += "&location=" + stringToAddress(rawAddress);
             stringDest += "&locationSearch=true";
-
-            getJSON(stringDest);
         }
+
+        getJSON(stringDest);
 
 
         //getString(stringDest);
@@ -485,26 +532,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         return false;
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        // Handle new location update
-
-        if (!requestSatisfied)
-        {
-            userLocation = location;
-
-            stringDest += "&location=" + userLocation.getLatitude() + "," + userLocation.getLongitude();
-
-            stringDest += "&locationSearch=false";
-
-            getJSON(stringDest);
-
-            requestSatisfied = true;
-        }
-
-
-        int i = 1;
-    }
+//    @Override
+//    public void onLocationChanged(Location location) {
+//        // Handle new location update
+//
+//        if (!requestSatisfied)
+//        {
+//            userLocation = location;
+//
+//
+//        }
+//
+//
+//        int i = 1;
+//    }
 
     public boolean hasGPS()
     {

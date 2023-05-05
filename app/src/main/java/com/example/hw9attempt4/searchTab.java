@@ -190,7 +190,10 @@ public class searchTab extends Fragment {
                 autoDetect.setChecked(false);
                 locationInput.setText("");
 
-                snackBar.dismiss();
+                if (snackBar != null)
+                {
+                    snackBar.dismiss();
+                }
 
 
                 //View outerLayout = view.findViewById(R.id.searchContainer);
@@ -263,6 +266,23 @@ public class searchTab extends Fragment {
                 android.R.layout.simple_list_item_1, autoCompleteStrings);
 
         keywordInput.setAdapter(stringAdapter);
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+
+        EditText locationBox = getActivity().findViewById(R.id.locationInput);
+        Switch autoDetect = getActivity().findViewById(R.id.autoDetect);
+
+        if (autoDetect.isChecked())
+        {
+            locationBox.setVisibility(View.GONE);
+        }
+        else
+        {
+            locationBox.setVisibility(View.VISIBLE);
+        }
     }
 
 }
