@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -189,6 +190,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Sourced from 'https://learntodroid.com/how-to-switch-between-activities-in-android/'
     public void viewDetails(int position) {
+//        RecyclerView resultList = findViewById(R.id.resultList);
+//        resultList.setVisibility(RecyclerView.INVISIBLE);
+//        View resultProgress = findViewById(R.id.resultList);
+//        resultProgress.setVisibility(View.VISIBLE);
+
+
         Intent switchActivityIntent = new Intent(this, EventActivity.class);
         switchActivityIntent.putExtra("position", position);
         switchActivityIntent.putExtra("JSON", searchJSON.toString());
@@ -229,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Replaces the search fragment with the results fragment
     public void showSearchResults() {
-        stringDest = "https://hw8-380107.wl.r.appspot.com/ticketMaster?";
+        stringDest = "https://event-finder-417906.wl.r.appspot.com/ticketMaster?";
         stringDest += "keyword=" + stringToAddress(((TextView) findViewById(R.id.keywordInput)).getText().toString());
         stringDest += "&distance=" + ((TextView) findViewById(R.id.distanceInput)).getText();
         String catString = (String) ((Spinner) findViewById(R.id.categorySpinner)).getSelectedItem();

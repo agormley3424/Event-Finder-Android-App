@@ -155,7 +155,7 @@ public class artistTab extends Fragment {
                 //currentArtist = new ArtistObject();
 
                 final String artistName = artists.getJSONObject(i).getString("name");
-                final String requestString = "https://hw8-380107.wl.r.appspot.com/spotify?artist=" + artistName;
+                final String requestString = "https://event-finder-417906.wl.r.appspot.com/spotify?artist=" + artistName;
 
 
                 Thread thread = new Thread(() -> {
@@ -278,7 +278,7 @@ public class artistTab extends Fragment {
         try {
             artistJSON = response.getJSONObject("artists").getJSONArray("items").getJSONObject(position);
 
-            String albumString = "https://hw8-380107.wl.r.appspot.com/spotifyAlbums?artistID=" + artistJSON.getString("id");
+            String albumString = "https://event-finder-417906.wl.r.appspot.com/spotifyAlbums?artistID=" + artistJSON.getString("id");
 
             newArtist.name = artistJSON.getString("name");
 
